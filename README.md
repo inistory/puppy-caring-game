@@ -12,5 +12,5 @@ It is a dog care game using c language.
   8. If the intimacy, strength, affection score decreases during the game will give an alarm.
 
 
-Flow chart
+#Flow chart
 ![flow_chart](https://user-images.githubusercontent.com/53829167/68491106-89935580-028d-11ea-8037-1554146cd79a.jpg)
