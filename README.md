@@ -1,4 +1,4 @@
-# Puppy-caring-game
+# Puppy-caring-game (강아지 돌보기 게임)
 It is a dog care game using c language.
 
 #The following features are included.
