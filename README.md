@@ -13,7 +13,7 @@
  
 # Puppy-caring-game
  It is a dog care game using c language.
-#The following features are included.
+# The following features are included.
   1. Game start, game end, current time display
   2. Enter your name
   3. Playing: Ball play, Disk play , Stroking
