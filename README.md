@@ -25,4 +25,5 @@
 
 
 #Flow chart
-![flow_chart](https://user-images.githubusercontent.com/53829167/68491106-89935580-028d-11ea-8037-1554146cd79a.jpg)
+![flow_chart](https://user-images.githubusercontent.com/53829167/103842146-8d607900-50d8-11eb-9a5b-6e0bd7d95302.png)
+
