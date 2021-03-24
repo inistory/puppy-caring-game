@@ -24,9 +24,3 @@
   8. If the intimacy, strength, affection score decreases during the game will give an alarm.
 
 
-#Flow chart
-![flow_chart](https://user-images.githubusercontent.com/53829167/68491106-89935580-028d-11ea-8037-1554146cd79a.jpg)
-# Flow chart
-![flow_chart (1)](https://user-images.githubusercontent.com/53829167/103842415-3c9d5000-50d9-11eb-9155-dfb49f138e75.png)
-
-
