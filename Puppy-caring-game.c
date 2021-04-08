@@ -1,93 +1,94 @@
 #include<stdio.h>
-#include <windows.h>//gotoxy ÇÔ¼ö¸¦ ¾²±âÀ§ÇÑ Çì´õÆÄÀÏ(gotoxyÇÔ¼ö:ÄÜ¼Ö È­¸éÀÇ Æ¯Á¤ À§Ä¡·Î Ä¿¼­¸¦ ¿È°ÜµÐÈÄ¿¡, ±× °÷¿¡¼­ºÎÅÍ Ãâ·ÂÇÏ´Â ÇÔ¼ö)
+#include <windows.h>//gotoxy í•¨ìˆ˜ë¥¼ ì“°ê¸°ìœ„í•œ í—¤ë”íŒŒì¼(gotoxyí•¨ìˆ˜:ì½˜ì†” í™”ë©´ì˜ íŠ¹ì • ìœ„ì¹˜ë¡œ ì»¤ì„œë¥¼ ì˜´ê²¨ë‘”í›„ì—, ê·¸ ê³³ì—ì„œë¶€í„° ì¶œë ¥í•˜ëŠ” í•¨ìˆ˜)
 #include<stdlib.h> 
 #include<conio.h>
-#include<time.h> //·£´ýÇÔ¼ö ¾²±âÀ§ÇÑ Çì´õÆÄÀÏ
-#include <process.h> //Thread ¾²±âÀ§ÇÑ Çì´õÆÄÀÏ
+#include<time.h> //ëžœë¤í•¨ìˆ˜ ì“°ê¸°ìœ„í•œ í—¤ë”íŒŒì¼
+#include <process.h> //Thread ì“°ê¸°ìœ„í•œ í—¤ë”íŒŒì¼
 
-void start_game();//strat_gameÇÔ¼ö¼±¾ð
-void check_score();//check_scoreÇÔ¼ö¼±¾ð
-int opt1=1/*Choose while¹® Ã³À½¿¡ µé¾î°¡±â ÇÏ±â À§ÇØ¼­ ÃÊ±âÈ­*/,opt2,opt3,opt4,love=0,power=0,pretty=0,train=0,result;
-int time_count1=0, time_count2=0, time_count3=0, time_count4=0;//½º·¹µåÇÔ¼ö º¯¼ö°ª
 
-unsigned __stdcall Thread(void *arg) //½º·¹µå ÇÔ¼ö
+void start_game();//strat_gameí•¨ìˆ˜ì„ ì–¸
+void check_score();//check_scoreí•¨ìˆ˜ì„ ì–¸
+int opt1=1/*Choose whileë¬¸ ì²˜ìŒì— ë“¤ì–´ê°€ê¸° í•˜ê¸° ìœ„í•´ì„œ ì´ˆê¸°í™”*/,opt2,opt3,opt4,love=0,power=0,pretty=0,train=0,result;
+int time_count1=0, time_count2=0, time_count3=0, time_count4=0;//ìŠ¤ë ˆë“œí•¨ìˆ˜ ë³€ìˆ˜ê°’
+
+unsigned __stdcall Thread(void *arg) //ìŠ¤ë ˆë“œ í•¨ìˆ˜
 {
-   while(1)//¹Ýº¹À» À§ÇØ while¹®
+   while(1)//ë°˜ë³µì„ ìœ„í•´ whileë¬¸
     {
-       Sleep(1000);//1000=1ÃÊ
-     time_count1++;//½Ã°£ Áõ°¡
-     time_count2++;//½Ã°£ Áõ°¡
-     time_count3++;//½Ã°£ Áõ°¡
-     time_count4++;//½Ã°£ Áõ°¡
+       Sleep(1000);//1000=1ì´ˆ
+     time_count1++;//ì‹œê°„ ì¦ê°€
+     time_count2++;//ì‹œê°„ ì¦ê°€
+     time_count3++;//ì‹œê°„ ì¦ê°€
+     time_count4++;//ì‹œê°„ ì¦ê°€
       if(time_count1==59){
-       love-=3;//59ÃÊÈÄ Ä£¹Ðµµ 3°¨¼Ò
-            printf("\nÄ£¹Ðµµ°¡ 3¶³¾îÁ³¾î¿ä. ³î¾ÆÁÖ¼¼¿ä!\n");
-          time_count1= 0;//½Ã°£Áö³² 0À¸·Î ÃÊ±âÈ­
+       love-=3;//59ì´ˆí›„ ì¹œë°€ë„ 3ê°ì†Œ
+            printf("\nì¹œë°€ë„ê°€ 3ë–¨ì–´ì¡Œì–´ìš”. ë†€ì•„ì£¼ì„¸ìš”!\n");
+          time_count1= 0;//ì‹œê°„ì§€ë‚¨ 0ìœ¼ë¡œ ì´ˆê¸°í™”
          }
 
     else if(time_count2==83){
-         power-=4;//83ÃÊÈÄ Èû 4°¨¼Ò
-         printf("\nÈûÀÌ 4¶³¾îÁ³¾î¿ä. ¹äÀ» ÁÖ¼¼¿ä!\n");
-          time_count2= 0;//½Ã°£Áö³² 0À¸·Î ÃÊ±âÈ­
+         power-=4;//83ì´ˆí›„ íž˜ 4ê°ì†Œ
+         printf("\níž˜ì´ 4ë–¨ì–´ì¡Œì–´ìš”. ë°¥ì„ ì£¼ì„¸ìš”!\n");
+          time_count2= 0;//ì‹œê°„ì§€ë‚¨ 0ìœ¼ë¡œ ì´ˆê¸°í™”
       }
     else if(time_count3==113){
-      train-=5;//113ÃÊÈÄ ÈÆ·ÃÁ¡¼ö 5°¨¼Ò
-          printf("\nÈÆ·ÃÁ¡¼ö°¡ 5¶³¾îÁ³¾î¿ä. ÈÆ·ÃÇØÁÖ¼¼¿ä!\n");
-          time_count3= 0;//½Ã°£Áö³² 0À¸·Î ÃÊ±âÈ­
+      train-=5;//113ì´ˆí›„ í›ˆë ¨ì ìˆ˜ 5ê°ì†Œ
+          printf("\ní›ˆë ¨ì ìˆ˜ê°€ 5ë–¨ì–´ì¡Œì–´ìš”. í›ˆë ¨í•´ì£¼ì„¸ìš”!\n");
+          time_count3= 0;//ì‹œê°„ì§€ë‚¨ 0ìœ¼ë¡œ ì´ˆê¸°í™”
       }
-   else if(time_count4==900){//900ÃÊÈÄ¿¡ °ÔÀÓÁ¾·á
-      system("cls");//Ã¢ ±ú²ýÇÏ°Ô
-      printf("\n°­¾ÆÁö µ¹º¸±â °ÔÀÓÀÌ Á¾·áµÇ¾ú¾î¿ä! °¨»çÇÕ´Ï´Ù~\n");
-      check_score();//Á¡¼ö ½ºÄÚ¾î Ãâ·Â
+   else if(time_count4==900){//900ì´ˆí›„ì— ê²Œìž„ì¢…ë£Œ
+      system("cls");//ì°½ ê¹¨ë—í•˜ê²Œ
+      printf("\nê°•ì•„ì§€ ëŒë³´ê¸° ê²Œìž„ì´ ì¢…ë£Œë˜ì—ˆì–´ìš”! ê°ì‚¬í•©ë‹ˆë‹¤~\n");
+      check_score();//ì ìˆ˜ ìŠ¤ì½”ì–´ ì¶œë ¥
    }
  }
 }
-void gotoxy(int x, int y)//ÁÂÇ¥¼³Á¤
+void gotoxy(int x, int y)//ì¢Œí‘œì„¤ì •
 {
    COORD Pos;
    Pos.X = x;
-   Pos.Y = y; //¿øÇÏ´Â ÄÜ¼Ö Ä¿¼­ ÁÂÇ¥¸¦ ´ãÀº (x : °¡·ÎÃà, y : ¼¼·ÎÃà) COORD ±¸Á¶Ã¼ º¯¼ö¸¦ »ý¼º
+   Pos.Y = y; //ì›í•˜ëŠ” ì½˜ì†” ì»¤ì„œ ì¢Œí‘œë¥¼ ë‹´ì€ (x : ê°€ë¡œì¶•, y : ì„¸ë¡œì¶•) COORD êµ¬ì¡°ì²´ ë³€ìˆ˜ë¥¼ ìƒì„±
    SetConsoleCursorPosition(GetStdHandle(STD_OUTPUT_HANDLE),Pos);
-   //SetConsoleCursorPosition ÇÔ¼ö¿¡,Ãâ·ÂÀ§Ä¡¸¦ Á¤ÇØÁÖ°í,À§Ä¡¸¦ Á¤ÇØÁÖ¸é Ä¿¼­°¡ ÀÌµ¿
-   //ÇÚµé:OS ³»ºÎ¿¡¼­ °ü¸®ÇÏ´Â ÀÚ·á±¸Á¶
-   //GetStdHandle(STD_OUTPUT_HANDLE):Ç¥ÁØÄÜ¼Ö Ãâ·Â ÇÚµé°ª
-   //Pos:À§Ä¡°ª
+   //SetConsoleCursorPosition í•¨ìˆ˜ì—,ì¶œë ¥ìœ„ì¹˜ë¥¼ ì •í•´ì£¼ê³ ,ìœ„ì¹˜ë¥¼ ì •í•´ì£¼ë©´ ì»¤ì„œê°€ ì´ë™
+   //í•¸ë“¤:OS ë‚´ë¶€ì—ì„œ ê´€ë¦¬í•˜ëŠ” ìžë£Œêµ¬ì¡°
+   //GetStdHandle(STD_OUTPUT_HANDLE):í‘œì¤€ì½˜ì†” ì¶œë ¥ í•¸ë“¤ê°’
+   //Pos:ìœ„ì¹˜ê°’
 }
 
 void MeunPrint()
 {
-   gotoxy(50,4); printf("< °­ ¾Æ Áö   µ¹ º¸ ±â>\n");//ÁÂÇ¥ ÀÔ·Â
+   gotoxy(50,4); printf("< ê°• ì•„ ì§€   ëŒ ë³´ ê¸°>\n");//ì¢Œí‘œ ìž…ë ¥
    gotoxy(50,5); printf("      ____________\n");
    gotoxy(50,6); printf("    _-            -_\n");
-   gotoxy(50,7); printf("   l               ¤Ó\n");
-   gotoxy(50,8); printf("  ¤Ó ===      ===   l \n");
-   gotoxy(50,9); printf(" ¤Ó   o        o   l ¤Ó \n");
-   gotoxy(50,10); printf("¤Ó        ¤±       l  ¤Ó\n");
-   gotoxy(50,11); printf("¤Ó ¤Ó£¢   ¤Ó    £¢ l  ¤Ó\n");
-   gotoxy(50,12); printf("¤Ó_¤Ó     ¡Ô      ¤Ó__¤Ó\n");
-   gotoxy(50,13); printf("    ¤¤____________¡¹\n");
-   gotoxy(50,14); printf("       l         ¤Ó\n");
-   gotoxy(50,15); printf("       l l  l     ¤Ó \n");
-   gotoxy(50,16); printf("       l l  l      ¤Ó\n");
+   gotoxy(50,7); printf("   l               ã…£\n");
+   gotoxy(50,8); printf("  ã…£ ===      ===   l \n");
+   gotoxy(50,9); printf(" ã…£   o        o   l ã…£ \n");
+   gotoxy(50,10); printf("ã…£        ã…       l  ã…£\n");
+   gotoxy(50,11); printf("ã…£ ã…£ï¼‚   ã…£    ï¼‚ l  ã…£\n");
+   gotoxy(50,12); printf("ã…£_ã…£     âˆ‡      ã…£__ã…£\n");
+   gotoxy(50,13); printf("    ã„´____________ã€\n");
+   gotoxy(50,14); printf("       l         ã…£\n");
+   gotoxy(50,15); printf("       l l  l     ã…£ \n");
+   gotoxy(50,16); printf("       l l  l      ã…£\n");
    gotoxy(50,17); printf("       l l  l    (  l_____ \n");
    gotoxy(50,18); printf("      E__E__l___E___l-----l\n");   
-   gotoxy(53,20); printf("-----¸Þ´º-----\n");
-   gotoxy(53,21); printf("1.°Ô ÀÓ ½Ã ÀÛ \n");
-   gotoxy(53,22); printf("2.°Ô ÀÓ Á¾ ·á \n");
-   gotoxy(53,23); printf("3.Çö Àç ½Ã °£ \n");
+   gotoxy(53,20); printf("-----ë©”ë‰´-----\n");
+   gotoxy(53,21); printf("1.ê²Œ ìž„ ì‹œ ìž‘ \n");
+   gotoxy(53,22); printf("2.ê²Œ ìž„ ì¢… ë£Œ \n");
+   gotoxy(53,23); printf("3.í˜„ ìž¬ ì‹œ ê°„ \n");
    gotoxy(53,24); printf("--------------\n");
 }
-void Estart1()//½ÃÀÛ ÀÌ¸ðÆ¼ÄÜ1
+void Estart1()//ì‹œìž‘ ì´ëª¨í‹°ì½˜1
 {
-   gotoxy(50,4); printf("     ¢¾    ____________\n");
+   gotoxy(50,4); printf("     â™¥    ____________\n");
    gotoxy(50,5); printf("         _-            -\n");
-   gotoxy(50,6); printf("        l               ¤Ó ¢½\n");
-   gotoxy(50,7); printf("      ¤Ó   ¢Á       ¢Á  l ¤Ó \n");
-   gotoxy(50,8); printf("     ¤Ó        ¤±       l  ¤Ó\n");
-   gotoxy(50,9); printf("   ¢½¤Ó ¤Ó£¢   ¤Ó    £¢ l  ¤Ó\n");
-   gotoxy(50,10); printf("     ¤Ó_¤Ó     ¡Ô      ¤Ó__¤Ó¢¾    \n");
-   gotoxy(50,11); printf("  ______¤¤____________¡¹______  \n");
-   gotoxy(50,12); printf("¡ô_______               ______¡õ\n");
+   gotoxy(50,6); printf("        l               ã…£ â™¡\n");
+   gotoxy(50,7); printf("      ã…£   âŠ™       âŠ™  l ã…£ \n");
+   gotoxy(50,8); printf("     ã…£        ã…       l  ã…£\n");
+   gotoxy(50,9); printf("   â™¡ã…£ ã…£ï¼‚   ã…£    ï¼‚ l  ã…£\n");
+   gotoxy(50,10); printf("     ã…£_ã…£     âˆ‡      ã…£__ã…£â™¥    \n");
+   gotoxy(50,11); printf("  ______ã„´____________ã€______  \n");
+   gotoxy(50,12); printf("âˆˆ_______               ______âˆ‹\n");
    gotoxy(50,13); printf("         l             l\n");
    gotoxy(50,14); printf("         l             l\n");
    gotoxy(50,15); printf("         l             l\n");
@@ -95,148 +96,148 @@ void Estart1()//½ÃÀÛ ÀÌ¸ðÆ¼ÄÜ1
    gotoxy(50,17); printf("         l  _________  l\n");
    gotoxy(50,18); printf("         l l         l l\n");
    gotoxy(50,19); printf("         l l         l l\n");   
-   gotoxy(50,20); printf("__________£×_________£×________\n");
+   gotoxy(50,20); printf("__________ï¼·_________ï¼·________\n");
 
 }
 
-void Estart2()//½ÃÀÛ ÀÌ¸ðÆ¼ÄÜ2
+void Estart2()//ì‹œìž‘ ì´ëª¨í‹°ì½˜2
    {
    gotoxy(50,2); printf("           ____________\n");
-   gotoxy(50,3); printf("   ¢½    _-            ¤¡\n");
-   gotoxy(50,4); printf("        l                ¤Ó  \n");
-   gotoxy(50,5); printf("      ¤Ó   ¢Á       ¢Á  l ¤Ó¢¾ \n");
-   gotoxy(50,6); printf("     ¤Ó        ¤±       l  ¤Ó\n");
-   gotoxy(50,7); printf(" ¢¾  ¤Ó ¤Ó£¢   ¤Ó    £¢ l  ¤Ó\n");
-   gotoxy(50,8); printf("     ¤Ó_¤Ó     ¡Ô      ¤Ó__¤Ó  ¢½  \n");
-   gotoxy(50,9); printf("  ______¤¤____________¡¹______  \n");
-   gotoxy(50,10); printf("¡ô_______               ______¡õ\n");
+   gotoxy(50,3); printf("   â™¡    _-            ã„±\n");
+   gotoxy(50,4); printf("        l                ã…£  \n");
+   gotoxy(50,5); printf("      ã…£   âŠ™       âŠ™  l ã…£â™¥ \n");
+   gotoxy(50,6); printf("     ã…£        ã…       l  ã…£\n");
+   gotoxy(50,7); printf(" â™¥  ã…£ ã…£ï¼‚   ã…£    ï¼‚ l  ã…£\n");
+   gotoxy(50,8); printf("     ã…£_ã…£     âˆ‡      ã…£__ã…£  â™¡  \n");
+   gotoxy(50,9); printf("  ______ã„´____________ã€______  \n");
+   gotoxy(50,10); printf("âˆˆ_______               ______âˆ‹\n");
    gotoxy(50,11); printf("         l             l\n");
    gotoxy(50,12); printf("         l             l\n");
    gotoxy(50,13); printf("         l             l\n");
    gotoxy(50,14); printf("         l             l\n");
    gotoxy(50,15); printf("     ____l             l_____\n");
-   gotoxy(50,16); printf("  ¡ô________________________¡õ\n");
+   gotoxy(50,16); printf("  âˆˆ________________________âˆ‹\n");
    gotoxy(50,20); printf("_______________________________\n");
 
 }
 
-void Eend1()//³¡³² ÀÌ¸ðÆ¼ÄÜ1
+void Eend1()//ëë‚¨ ì´ëª¨í‹°ì½˜1
 {
-   system("cls");//È­¸é ±ú²ýÇÏ°Ô
+   system("cls");//í™”ë©´ ê¹¨ë—í•˜ê²Œ
     gotoxy(50,4);printf("          ____________\n");     
-    gotoxy(50,5); printf("     ¡Ù _-            -_\n");
-    gotoxy(50,6); printf("       l               ¤Ó\n");
-    gotoxy(50,7); printf("      ¤Ó ===      ===   l  ¡Ú\n");
-    gotoxy(50,8); printf("     ¤Ó   ¤µ       ¤µ  l ¤Ó \n");
-    gotoxy(50,9); printf("    ¤Ó        ¤±       l  ¤Ó   ¡Ù\n");
-    gotoxy(50,10); printf("    ¤Ó ¤Ó£¢   ¤Ó    £¢ l  ¤Ó\n");
-    gotoxy(50,11); printf("¡Ú  ¤Ó_¤Ó     ¡Ô      ¤Ó__¤Ó     \n");        
-    gotoxy(50,12); printf("  ______¤¤____________¡¹______        \n"); 
-    gotoxy(50,13); printf("¡ô_______               ______¡õ\n");
+    gotoxy(50,5); printf("     â˜† _-            -_\n");
+    gotoxy(50,6); printf("       l               ã…£\n");
+    gotoxy(50,7); printf("      ã…£ ===      ===   l  â˜…\n");
+    gotoxy(50,8); printf("     ã…£   ã……       ã……  l ã…£ \n");
+    gotoxy(50,9); printf("    ã…£        ã…       l  ã…£   â˜†\n");
+    gotoxy(50,10); printf("    ã…£ ã…£ï¼‚   ã…£    ï¼‚ l  ã…£\n");
+    gotoxy(50,11); printf("â˜…  ã…£_ã…£     âˆ‡      ã…£__ã…£     \n");        
+    gotoxy(50,12); printf("  ______ã„´____________ã€______        \n"); 
+    gotoxy(50,13); printf("âˆˆ_______               ______âˆ‹\n");
     gotoxy(50,14); printf("        l             l\n");
     gotoxy(50,15); printf("        l             l     \n");                          
     gotoxy(50,16); printf("        l             l         \n");               
     gotoxy(50,17); printf("        l             l_____\n");
-    gotoxy(50,18); printf("        l  _________________¡õ\n");
+    gotoxy(50,18); printf("        l  _________________âˆ‹\n");
     gotoxy(50,19); printf("        l l   \n");
     gotoxy(50,20); printf("        l l\n");
-    gotoxy(50,21); printf("        £×\n");
+    gotoxy(50,21); printf("        ï¼·\n");
 }
 
 
-void Eend2()//³¡³² ÀÌ¸ðÆ¼ÄÜ2
+void Eend2()//ëë‚¨ ì´ëª¨í‹°ì½˜2
    {
    gotoxy(50,4); printf("          ____________\n");     
-    gotoxy(50,5); printf("     ¡Ú _-            -_\n");
-    gotoxy(50,6); printf("       l               ¤Ó\n");
-    gotoxy(50,7); printf("      ¤Ó ===      ===   l  ¡Ù\n");
-    gotoxy(50,8); printf("     ¤Ó   ¤µ       ¤µ  l ¤Ó \n");
-    gotoxy(50,9); printf("    ¤Ó        ¤±       l  ¤Ó   ¡Ú\n");
-    gotoxy(50,10); printf("    ¤Ó ¤Ó£¢   ¤Ó    £¢ l  ¤Ó\n");
-    gotoxy(50,11); printf("¡Ù  ¤Ó_¤Ó     ¡Ô      ¤Ó__¤Ó     \n");        
-    gotoxy(50,12); printf("  ______¤¤____________¡¹______        \n"); 
-    gotoxy(50,13); printf("¡ô_______               ______¡õ\n");
+    gotoxy(50,5); printf("     â˜… _-            -_\n");
+    gotoxy(50,6); printf("       l               ã…£\n");
+    gotoxy(50,7); printf("      ã…£ ===      ===   l  â˜†\n");
+    gotoxy(50,8); printf("     ã…£   ã……       ã……  l ã…£ \n");
+    gotoxy(50,9); printf("    ã…£        ã…       l  ã…£   â˜…\n");
+    gotoxy(50,10); printf("    ã…£ ã…£ï¼‚   ã…£    ï¼‚ l  ã…£\n");
+    gotoxy(50,11); printf("â˜†  ã…£_ã…£     âˆ‡      ã…£__ã…£     \n");        
+    gotoxy(50,12); printf("  ______ã„´____________ã€______        \n"); 
+    gotoxy(50,13); printf("âˆˆ_______               ______âˆ‹\n");
     gotoxy(50,14); printf("         l             l\n");
     gotoxy(50,15); printf("         l             l     \n");                          
     gotoxy(50,16); printf("         l             l         \n");               
     gotoxy(50,17); printf("    _____l             l\n");
-    gotoxy(50,18); printf("  ¡ô_________________  l\n");
+    gotoxy(50,18); printf("  âˆˆ_________________  l\n");
     gotoxy(50,19); printf("                     l l   \n");
     gotoxy(50,20); printf("                     l l\n");
-    gotoxy(50,21); printf("                      £×\n");
+    gotoxy(50,21); printf("                      ï¼·\n");
 }
 
-void Eplay()//°ø³îÀÌ ÀÌ¸ðÆ¼ÄÜ
+void Eplay()//ê³µë†€ì´ ì´ëª¨í‹°ì½˜
 {
    gotoxy(30,4); printf("                      ____________     \n");
    gotoxy(30,5); printf("                    _-            -_\n");
-   gotoxy(30,6); printf("                   l               ¤Ó\n");
-   gotoxy(30,7); printf("                  ¤Ó ===      ===   l \n");
-   gotoxy(30,8); printf("                 ¤Ó   ¢Á       ¢Á  l ¤Ó\n");
-   gotoxy(30,9); printf("                ¤Ó        ¤±       l  ¤Ó\n");
-   gotoxy(30,10); printf("                ¤Ó ¤Ó£¢   ¤Ó    £¢ l  ¤Ó\n"); 
-   gotoxy(30,11); printf("                ¤Ó_¤Ó     ¡Ü      ¤Ó__¤Ó\n");
-   gotoxy(30,12); printf("              ______¤¤___//_______¡¹______\n");
-   gotoxy(30,13); printf("            ¡ô_______   //          ______¡õ\n");
+   gotoxy(30,6); printf("                   l               ã…£\n");
+   gotoxy(30,7); printf("                  ã…£ ===      ===   l \n");
+   gotoxy(30,8); printf("                 ã…£   âŠ™       âŠ™  l ã…£\n");
+   gotoxy(30,9); printf("                ã…£        ã…       l  ã…£\n");
+   gotoxy(30,10); printf("                ã…£ ã…£ï¼‚   ã…£    ï¼‚ l  ã…£\n"); 
+   gotoxy(30,11); printf("                ã…£_ã…£     â—      ã…£__ã…£\n");
+   gotoxy(30,12); printf("              ______ã„´___//_______ã€______\n");
+   gotoxy(30,13); printf("            âˆˆ_______   //          ______âˆ‹\n");
    gotoxy(30,14); printf("                    l             l\n");
    gotoxy(30,15); printf("                    l             l\n");
    gotoxy(30,16); printf("                    l             l\n");   
    gotoxy(33,17); printf("                 l             l\n");
    gotoxy(33,18); printf("             ____l             l_____\n");
-   gotoxy(33,19); printf("           ¡ô________________________¡õ\n");
+   gotoxy(33,19); printf("           âˆˆ________________________âˆ‹\n");
    gotoxy(33,20); printf("\n");
    gotoxy(33,21); printf("\n");
    gotoxy(33,22); printf("          ______________________________\n");        
 }
 
-void Eplaydisk()//¿ø¹Ý´øÁö±â ÀÌ¸ðÆ¼ÄÜ
+void Eplaydisk()//ì›ë°˜ë˜ì§€ê¸° ì´ëª¨í‹°ì½˜
 {
    gotoxy(30,4); printf("                      ____________     \n");
    gotoxy(30,5); printf("                    _-            -_\n");
-   gotoxy(30,6); printf("                   l               ¤Ó\n");
-   gotoxy(30,7); printf("                  ¤Ó ===      ===   l  \n");
-   gotoxy(30,8); printf("                 ¤Ó   ¢Á       ¢Á  l ¤Ó \n");
-   gotoxy(30,9); printf("                ¤Ó        ¤±       l  ¤Ó   \n");
-   gotoxy(30,10); printf("                ¤Ó ¤Ó£¢   ¤Ó    £¢ l  ¤Ó\n");
-   gotoxy(30,11); printf("                ¤Ó_¤Ó     ¡Ô      ¤Ó__¤Ó     \n");
-   gotoxy(30,12); printf("                   ¤¤____________¡¹    \n");
-   gotoxy(30,13); printf("                   ¤Ó   _¤Ñ¤Ñ_    l\n");
-   gotoxy(30,14); printf("                   ¤Ó  ¤Ó     ¤Ó  l\n");
-   gotoxy(30,15); printf("                   ¤Ó_¡õ       ¡ô_¤Ó\n");
+   gotoxy(30,6); printf("                   l               ã…£\n");
+   gotoxy(30,7); printf("                  ã…£ ===      ===   l  \n");
+   gotoxy(30,8); printf("                 ã…£   âŠ™       âŠ™  l ã…£ \n");
+   gotoxy(30,9); printf("                ã…£        ã…       l  ã…£   \n");
+   gotoxy(30,10); printf("                ã…£ ã…£ï¼‚   ã…£    ï¼‚ l  ã…£\n");
+   gotoxy(30,11); printf("                ã…£_ã…£     âˆ‡      ã…£__ã…£     \n");
+   gotoxy(30,12); printf("                   ã„´____________ã€    \n");
+   gotoxy(30,13); printf("                   ã…£   _ã…¡ã…¡_    l\n");
+   gotoxy(30,14); printf("                   ã…£  ã…£     ã…£  l\n");
+   gotoxy(30,15); printf("                   ã…£_âˆ‹       âˆˆ_ã…£\n");
    gotoxy(30,16); printf("                    l  l      l   l  \n");   
-   gotoxy(30,17); printf("                    l   -¤Ñ¤Ñ-    l         \n");
+   gotoxy(30,17); printf("                    l   -ã…¡ã…¡-    l         \n");
    gotoxy(30,18); printf("                    l  _________  l    \n");
    gotoxy(30,19); printf("                    l l         l l\n");
    gotoxy(30,20); printf("                    l l         l l \n");
-   gotoxy(30,21); printf("                     £×          £× \n"); 
+   gotoxy(30,21); printf("                     ï¼·          ï¼· \n"); 
 }
-void Etouch()//¾²´Ùµë±â ÀÌ¸ðÆ¼ÄÜ
+void Etouch()//ì“°ë‹¤ë“¬ê¸° ì´ëª¨í‹°ì½˜
 {
    gotoxy(30,6); printf("                      ____________     \n");
    gotoxy(30,7); printf("                    _-            -_\n");
-   gotoxy(30,8); printf("             ¢½¢¾¢½l               ¤Ó¢¾¢½¢¾\n");
-   gotoxy(30,9); printf("                  ¤Ó ===      ===   l \n");
-   gotoxy(30,10); printf("                 ¤Ó   ¢½       ¢½  l ¤Ó\n");
-   gotoxy(30,11); printf("                ¤Ó        ¤±       l  ¤Ó\n");
-   gotoxy(30,12); printf("                ¤Ó ¤Ó£¢   ¤Ó    £¢ l  ¤Ó\n"); 
-   gotoxy(30,13); printf("                ¤Ó_¤Ó     ¥ø      ¤Ó__¤Ó\n");
-   gotoxy(30,14); printf("                   ¤¤______________¡¹\n");
-   gotoxy(30,15); printf("                      l         ¤Ó\n");
-   gotoxy(30,16); printf("                      l l  l     ¤Ó    __ \n");
-   gotoxy(30,17); printf("                      l l  l      ¤Ó\  / /\n");
+   gotoxy(30,8); printf("             â™¡â™¥â™¡l               ã…£â™¥â™¡â™¥\n");
+   gotoxy(30,9); printf("                  ã…£ ===      ===   l \n");
+   gotoxy(30,10); printf("                 ã…£   â™¡       â™¡  l ã…£\n");
+   gotoxy(30,11); printf("                ã…£        ã…       l  ã…£\n");
+   gotoxy(30,12); printf("                ã…£ ã…£ï¼‚   ã…£    ï¼‚ l  ã…£\n"); 
+   gotoxy(30,13); printf("                ã…£_ã…£     Ï‰      ã…£__ã…£\n");
+   gotoxy(30,14); printf("                   ã„´______________ã€\n");
+   gotoxy(30,15); printf("                      l         ã…£\n");
+   gotoxy(30,16); printf("                      l l  l     ã…£    __ \n");
+   gotoxy(30,17); printf("                      l l  l      ã…£\  / /\n");
    gotoxy(30,18); printf("                      l l  l    (  l_/ /\n");   
    gotoxy(30,19); printf("                     E__E__l___E___l--/\n");
 }
-void Efoot()//¹ßÅéÀÚ¸£´Â ÀÌ¸ðÆ¼ÄÜ
+void Efoot()//ë°œí†±ìžë¥´ëŠ” ì´ëª¨í‹°ì½˜
 {
    gotoxy(30,10); printf("l        l        l        l        l        l        l\n");
    gotoxy(30,11); printf("l        l        l        l        l        l        l\n");
-   gotoxy(30,12); printf("l   ¹ß   l   °¡   l   ¶ô   l   ¹ß   l   °¡   l   ¶ô   l\n");
+   gotoxy(30,12); printf("l   ë°œ   l   ê°€   l   ë½   l   ë°œ   l   ê°€   l   ë½   l\n");
    gotoxy(30,13); printf("l        l        l        l        l        l        l\n");
-   gotoxy(30,14); printf(" ¤Ñ¤Ñ¤Ñ¤Ñ ¤Ñ¤Ñ¤Ñ¤Ñ ¤Ñ¤Ñ¤Ñ¤Ñ ¤Ñ¤Ñ¤Ñ¤Ñ ¤Ñ¤Ñ¤Ñ¤Ñ ¤Ñ¤Ñ¤Ñ¤Ñ \n");
-   gotoxy(30,15); printf("    ¡ä       ¡ä       ¡ä       ¡ä       ¡ä       ¡ä   ±ò²û~~¡Ù\n");
+   gotoxy(30,14); printf(" ã…¡ã…¡ã…¡ã…¡ ã…¡ã…¡ã…¡ã…¡ ã…¡ã…¡ã…¡ã…¡ ã…¡ã…¡ã…¡ã…¡ ã…¡ã…¡ã…¡ã…¡ ã…¡ã…¡ã…¡ã…¡ \n");
+   gotoxy(30,15); printf("    â–½       â–½       â–½       â–½       â–½       â–½   ê¹”ë”~~â˜†\n");
 }
-void Ewalking()//»êÃ¥ÇÏ´Â ÀÌ¸ðÆ¼ÄÜ
+void Ewalking()//ì‚°ì±…í•˜ëŠ” ì´ëª¨í‹°ì½˜
 {
    gotoxy(15,1); printf("                                          / /      \n");
    gotoxy(15,2); printf("                                         / /      \n");
@@ -245,516 +246,516 @@ void Ewalking()//»êÃ¥ÇÏ´Â ÀÌ¸ðÆ¼ÄÜ
    gotoxy(15,5); printf("                                      / /      \n");
    gotoxy(15,6); printf("                      ____________   / /      \n");
    gotoxy(15,7); printf("                    _-            -_/ /\n");
-   gotoxy(15,8); printf("                   l               ¤Ó/\n");
-   gotoxy(15,9); printf("                  ¤Ó ===      ===   l    ¢Ý¢Ü¢Û\n");
-   gotoxy(15,10); printf("                 ¤Ó    o        o  l ¤Ó\n");
-   gotoxy(15,11); printf("                ¤Ó        ¤±       l  ¤Ó\n");
-   gotoxy(15,12); printf("                ¤Ó ¤Ó£¢   ¤Ó    £¢ l  ¤Ó\n"); 
-   gotoxy(15,13); printf("                ¤Ó_¤Ó     ¥ø      ¤Ó__¤Ó\n");
-   gotoxy(15,14); printf("                     ¤¤__________¡¹-------_____  \n");
-   gotoxy(15,15); printf("                      l¥È               -----l\n");
+   gotoxy(15,8); printf("                   l               ã…£/\n");
+   gotoxy(15,9); printf("                  ã…£ ===      ===   l    â™¬â™ªâ™©\n");
+   gotoxy(15,10); printf("                 ã…£    o        o  l ã…£\n");
+   gotoxy(15,11); printf("                ã…£        ã…       l  ã…£\n");
+   gotoxy(15,12); printf("                ã…£ ã…£ï¼‚   ã…£    ï¼‚ l  ã…£\n"); 
+   gotoxy(15,13); printf("                ã…£_ã…£     Ï‰      ã…£__ã…£\n");
+   gotoxy(15,14); printf("                     ã„´__________ã€-------_____  \n");
+   gotoxy(15,15); printf("                      lÎ˜               -----l\n");
    gotoxy(15,16); printf("                      l                 l\n");
    gotoxy(15,17); printf("                      l l  l-------l l  l\n");
    gotoxy(15,18); printf("                      l l  l      _l l  l\n");   
    gotoxy(15,19); printf("                     E__E__l     E__E___l\n");
 }
-void Ecut()//ÅÐÂ¥¸£´Â ÀÌ¸ðÆ¼ÄÜ
+void Ecut()//í„¸ì§œë¥´ëŠ” ì´ëª¨í‹°ì½˜
 {
    gotoxy(30,6); printf("                      ____________\n");
-   gotoxy(30,7); printf("              ¡Þ    _-            -_\n");
-   gotoxy(30,8); printf("                   l               ¤Ó\n");
-   gotoxy(30,9); printf("                  ¤Ó ===      ===   l  ¡ß \n");
-   gotoxy(30,10); printf("                 ¤Ó   >        <   l ¤Ó\n");
-   gotoxy(30,11); printf("                ¤Ó        ¤±       l  ¤Ó\n");
-   gotoxy(30,12); printf("                ¤Ó ¤Ó£¢   ¤Ó    £¢ l  ¤Ó\n"); 
-   gotoxy(30,13); printf("             ¡ß ¤Ó_¤Ó     ¡Ô      ¤Ó__¤Ó ¡Þ\n");
-   gotoxy(30,14); printf("             ______¤¤____________¡¹______\n");
-   gotoxy(30,15); printf("           ¡ô_______               ______¡õ\n");
-   gotoxy(30,16); printf("              ¡ß    l             l\n");
-   gotoxy(30,17); printf("                    l             l  ¡ß  \n");
+   gotoxy(30,7); printf("              â—‡    _-            -_\n");
+   gotoxy(30,8); printf("                   l               ã…£\n");
+   gotoxy(30,9); printf("                  ã…£ ===      ===   l  â—† \n");
+   gotoxy(30,10); printf("                 ã…£   >        <   l ã…£\n");
+   gotoxy(30,11); printf("                ã…£        ã…       l  ã…£\n");
+   gotoxy(30,12); printf("                ã…£ ã…£ï¼‚   ã…£    ï¼‚ l  ã…£\n"); 
+   gotoxy(30,13); printf("             â—† ã…£_ã…£     âˆ‡      ã…£__ã…£ â—‡\n");
+   gotoxy(30,14); printf("             ______ã„´____________ã€______\n");
+   gotoxy(30,15); printf("           âˆˆ_______               ______âˆ‹\n");
+   gotoxy(30,16); printf("              â—†    l             l\n");
+   gotoxy(30,17); printf("                    l             l  â—†  \n");
    gotoxy(30,18); printf("                    l             l\n");   
-   gotoxy(30,19); printf("            ¡Þ      l             l\n");
+   gotoxy(30,19); printf("            â—‡      l             l\n");
    gotoxy(30,20); printf("                    l  _________  l\n");
    gotoxy(30,21); printf("                    l l         l l\n");
    gotoxy(30,22); printf("                    l l         l l\n");
-   gotoxy(30,23); printf("                     £×          £×\n");
+   gotoxy(30,23); printf("                     ï¼·          ï¼·\n");
 }
-void Efood()//»ç·á¸Ô´Â ÀÌ¸ðÆ¼ÄÜ
+void Efood()//ì‚¬ë£Œë¨¹ëŠ” ì´ëª¨í‹°ì½˜
 {
    gotoxy(40,6); printf("         ____________     \n");
-   gotoxy(40,7); printf("  ¢¾   _-            -_   ¢½\n");
-   gotoxy(40,8); printf("       l               ¤Ó\n");
-   gotoxy(40,9); printf("      ¤Ó ===      ===   l  \n");
-   gotoxy(40,10); printf("     ¤Ó   ¡ü       ¡ü  l ¤Ó \n");
-   gotoxy(40,11); printf("    ¤Ó        ¤±       l  ¤Ó   \n");
-   gotoxy(40,12); printf("   ¤Ó ¤Ó£¢    ¤Ó    £¢  l  ¤Ó\n"); 
-   gotoxy(40,13); printf("¢½ ¤Ó_¤Ó     )¡Ô(       ¤Ó__¤Ó \n");
-   gotoxy(40,14); printf("       ¤¤____________¡¹      \n");
-   gotoxy(40,15); printf("       ¤Ó   ¤·¤·¤·    l  ¢¾\n");
-   gotoxy(40,16); printf("      ¤Ó  ¤·¤·¤·¤·¤·  l\n");
-   gotoxy(40,17); printf("       ¤Ó_¡õ »ç·á ¡ô_¤Ó    ¢½\n");
+   gotoxy(40,7); printf("  â™¥   _-            -_   â™¡\n");
+   gotoxy(40,8); printf("       l               ã…£\n");
+   gotoxy(40,9); printf("      ã…£ ===      ===   l  \n");
+   gotoxy(40,10); printf("     ã…£   âˆ§       âˆ§  l ã…£ \n");
+   gotoxy(40,11); printf("    ã…£        ã…       l  ã…£   \n");
+   gotoxy(40,12); printf("   ã…£ ã…£ï¼‚    ã…£    ï¼‚  l  ã…£\n"); 
+   gotoxy(40,13); printf("â™¡ ã…£_ã…£     )âˆ‡(       ã…£__ã…£ \n");
+   gotoxy(40,14); printf("       ã„´____________ã€      \n");
+   gotoxy(40,15); printf("       ã…£   ã…‡ã…‡ã…‡    l  â™¥\n");
+   gotoxy(40,16); printf("      ã…£  ã…‡ã…‡ã…‡ã…‡ã…‡  l\n");
+   gotoxy(40,17); printf("       ã…£_âˆ‹ ì‚¬ë£Œ âˆˆ_ã…£    â™¡\n");
    gotoxy(40,18); printf("        l  l      l   l\n");   
-   gotoxy(40,19); printf("     ¢¾ l   -¤Ñ¤Ñ-    l\n");
+   gotoxy(40,19); printf("     â™¥ l   -ã…¡ã…¡-    l\n");
    gotoxy(40,20); printf("        l  _________  l\n");
    gotoxy(40,21); printf("        l l         l l\n");
    gotoxy(40,22); printf("        l l         l l\n");
-   gotoxy(40,23); printf("         £×          £×\n");
+   gotoxy(40,23); printf("         ï¼·          ï¼·\n");
 }
-void Ewater()//¹°¸Ô´Â ÀÌ¸ðÆ¼ÄÜ
+void Ewater()//ë¬¼ë¨¹ëŠ” ì´ëª¨í‹°ì½˜
 {
    gotoxy(45,6); printf("         ____________     \n");
-   gotoxy(45,7); printf("  ¢¾   _-            -_   ¢½\n");
-   gotoxy(45,8); printf("       l               ¤Ó\n");
-   gotoxy(45,9); printf("      ¤Ó ===      ===   l  \n");
-   gotoxy(45,10); printf("     ¤Ó   ¡ü       ¡ü  l ¤Ó \n");
-   gotoxy(45,11); printf("    ¤Ó        ¤±       l  ¤Ó   \n");
-   gotoxy(45,12); printf("   ¤Ó ¤Ó£¢    ¤Ó    £¢  l  ¤Ó\n"); 
-   gotoxy(45,13); printf("¢½ ¤Ó_¤Ó     )--(       ¤Ó__¤Ó \n");
-   gotoxy(45,14); printf("       ¤¤____________¡¹      \n");
-   gotoxy(45,15); printf("       ¤Ó   ______    l  ¢¾\n");
-   gotoxy(45,16); printf("      ¤Ó   l      l    l\n");
-   gotoxy(45,17); printf("       ¤Ó_¡õ  ¹° ¡ô___¤Ó    ¢½\n");
+   gotoxy(45,7); printf("  â™¥   _-            -_   â™¡\n");
+   gotoxy(45,8); printf("       l               ã…£\n");
+   gotoxy(45,9); printf("      ã…£ ===      ===   l  \n");
+   gotoxy(45,10); printf("     ã…£   âˆ§       âˆ§  l ã…£ \n");
+   gotoxy(45,11); printf("    ã…£        ã…       l  ã…£   \n");
+   gotoxy(45,12); printf("   ã…£ ã…£ï¼‚    ã…£    ï¼‚  l  ã…£\n"); 
+   gotoxy(45,13); printf("â™¡ ã…£_ã…£     )--(       ã…£__ã…£ \n");
+   gotoxy(45,14); printf("       ã„´____________ã€      \n");
+   gotoxy(45,15); printf("       ã…£   ______    l  â™¥\n");
+   gotoxy(45,16); printf("      ã…£   l      l    l\n");
+   gotoxy(45,17); printf("       ã…£_âˆ‹  ë¬¼ âˆˆ___ã…£    â™¡\n");
    gotoxy(45,18); printf("        l  l      l   l\n");   
-   gotoxy(45,19); printf("     ¢¾ l   -¤Ñ¤Ñ-    l\n");
+   gotoxy(45,19); printf("     â™¥ l   -ã…¡ã…¡-    l\n");
    gotoxy(45,20); printf("        l  _________  l\n");
    gotoxy(45,21); printf("        l l         l l\n");
    gotoxy(45,22); printf("        l l         l l\n");
-   gotoxy(45,23); printf("         £×          £×\n");
+   gotoxy(45,23); printf("         ï¼·          ï¼·\n");
 }
-void Eto()//ÅäÇÏ´Â ÀÌ¸ðÆ¼ÄÜ
+void Eto()//í† í•˜ëŠ” ì´ëª¨í‹°ì½˜
 {
    gotoxy(30,6); printf("                      ____________\n");
    gotoxy(30,7); printf("                    _-            -_\n");
-   gotoxy(30,8); printf("                   l               ¤Ó\n");
-   gotoxy(30,9); printf("                  ¤Ó ===      ===    l\n");
-   gotoxy(30,10); printf("                 ¤Ó   X       X    l ¤Ó\n");
-   gotoxy(30,11); printf("                ¤Ó        ¤±       l  ¤Ó\n");
-   gotoxy(30,12); printf("                ¤Ó ¤Ó   __l___     l  ¤Ó\n"); 
-   gotoxy(30,13); printf("                ¤Ó_¤Ó   l_____l   ¤Ó__¤Ó\n");
-   gotoxy(30,14); printf("                    ¤¤__/@  ^ /___¡¹  \n");
-   gotoxy(30,15); printf("                   ¤Ó  /$  # /    ¤Ó\n");
-   gotoxy(30,16); printf("                  ¤Ól / %^   /     l¤Ó\n");
-   gotoxy(30,17); printf("                  ¤Ól/\  !  /      l¤Ó\n");
-   gotoxy(30,18); printf("                  ¤Ó/ 3 # /       l¤Ó\n");   
-   gotoxy(30,19); printf("                   /  ¤Ç /        ¤²\n");
+   gotoxy(30,8); printf("                   l               ã…£\n");
+   gotoxy(30,9); printf("                  ã…£ ===      ===    l\n");
+   gotoxy(30,10); printf("                 ã…£   X       X    l ã…£\n");
+   gotoxy(30,11); printf("                ã…£        ã…       l  ã…£\n");
+   gotoxy(30,12); printf("                ã…£ ã…£   __l___     l  ã…£\n"); 
+   gotoxy(30,13); printf("                ã…£_ã…£   l_____l   ã…£__ã…£\n");
+   gotoxy(30,14); printf("                    ã„´__/@  ^ /___ã€  \n");
+   gotoxy(30,15); printf("                   ã…£  /$  # /    ã…£\n");
+   gotoxy(30,16); printf("                  ã…£l / %^   /     lã…£\n");
+   gotoxy(30,17); printf("                  ã…£l/\  !  /      lã…£\n");
+   gotoxy(30,18); printf("                  ã…£/ 3 # /       lã…£\n");   
+   gotoxy(30,19); printf("                   /  ã…— /        ã…‚\n");
    gotoxy(30,20); printf("                  / )   /________  l\n");
    gotoxy(30,21); printf("                 /? /@ / l       l l\n");
    gotoxy(30,22); printf("                / / / /l l       l l\n");
-   gotoxy(30,23); printf("                       £×        £×\n");
+   gotoxy(30,23); printf("                       ï¼·        ï¼·\n");
 }
-void Ehumanfood()//»ç¶÷À½½Ä¸Ô´Â ÀÌ¸ðÆ¼ÄÜ
+void Ehumanfood()//ì‚¬ëžŒìŒì‹ë¨¹ëŠ” ì´ëª¨í‹°ì½˜
 {
    gotoxy(30,6); printf("                      ____________\n");
-   gotoxy(30,7); printf("             ¤Ð¤Ð   _-            -_\n");
-   gotoxy(30,8); printf("                   l               ¤Ó\n");
-   gotoxy(30,9); printf("                  ¤Ó ===      ===   l \n");
-   gotoxy(30,10); printf("                 ¤Ó   ¤Ð       ¤Ð  l ¤Ó\n");
-   gotoxy(30,11); printf("                ¤Ó    ¡ó  ¤±   ¡ó  l  ¤Ó\n");
-   gotoxy(30,12); printf("                ¤Ó ¤Ó ¡ó  ¤Ó   ¡ó  l  ¤Ó\n"); 
-   gotoxy(30,13); printf("                ¤Ó_¤Ó     ¡Ò      ¤Ó__¤Ó\n");
-   gotoxy(30,14); printf("                    ¤¤____________¡¹  \n");
-   gotoxy(30,15); printf("                   ¤Ó             ¤Ó\n");
-   gotoxy(30,16); printf("                  ¤Ól             l¤Ó\n");
-   gotoxy(30,17); printf("                  ¤Ól             l¤Ó\n");
-   gotoxy(30,18); printf("                  ¤Ól             l¤Ó\n");   
-   gotoxy(30,19); printf("                  ¤²l             l¤²\n");
+   gotoxy(30,7); printf("             ã… ã…    _-            -_\n");
+   gotoxy(30,8); printf("                   l               ã…£\n");
+   gotoxy(30,9); printf("                  ã…£ ===      ===   l \n");
+   gotoxy(30,10); printf("                 ã…£   ã…        ã…   l ã…£\n");
+   gotoxy(30,11); printf("                ã…£    âˆ¬  ã…   âˆ¬  l  ã…£\n");
+   gotoxy(30,12); printf("                ã…£ ã…£ âˆ¬  ã…£   âˆ¬  l  ã…£\n"); 
+   gotoxy(30,13); printf("                ã…£_ã…£     âŒ’      ã…£__ã…£\n");
+   gotoxy(30,14); printf("                    ã„´____________ã€  \n");
+   gotoxy(30,15); printf("                   ã…£             ã…£\n");
+   gotoxy(30,16); printf("                  ã…£l             lã…£\n");
+   gotoxy(30,17); printf("                  ã…£l             lã…£\n");
+   gotoxy(30,18); printf("                  ã…£l             lã…£\n");   
+   gotoxy(30,19); printf("                  ã…‚l             lã…‚\n");
    gotoxy(30,20); printf("                    l  _________  l\n");
    gotoxy(30,21); printf("                    l l         l l\n");
    gotoxy(30,22); printf("                    l l         l l\n");
-   gotoxy(30,23); printf("                     £×          £×\n");
+   gotoxy(30,23); printf("                     ï¼·          ï¼·\n");
 }
 
-void Estart()//½ÃÀÛ ÀÌ¸ðÆ¼ÄÜ
+void Estart()//ì‹œìž‘ ì´ëª¨í‹°ì½˜
 {
    int time=5;
-   Estart1();//½ÃÀÛ ÀÌ¸ðÆ¼ÄÜ1
-      while(time>00) //time=5ÀÌ¹Ç·Î 5È¸ ¹Ýº¹
+   Estart1();//ì‹œìž‘ ì´ëª¨í‹°ì½˜1
+      while(time>00) //time=5ì´ë¯€ë¡œ 5íšŒ ë°˜ë³µ
       {
-         Sleep(50);//sleepÇÔ¼ö¶õ ÃÊ ´ÜÀ§·Î ÇÁ·Î±×·¥ ½ÇÇàÀ» Áö¿¬½ÃÅ°´Â ÇÔ¼ö. ()¾ÈÀÇ¼ýÀÚ/1000ÃÊ ÀÇ¹Ì. 0.5ÃÊ Áö¿¬½ÃÅ´
-            time--;//time °ªÀ» 1Â÷°¨
-      } //½ÃÀÛ ÀÌ¸ðÆ¼ÄÜ1 0.5ÃÊ¾¿ 5¹ø ½ÇÇà, Áï 2.5ÃÊ°£ ½ÃÀÛ ÀÌ¸ðÆ¼ÄÜ1 ½ÇÇà
-      system("cls");//½ÇÇà È­¸é Áö¿ì±â
-    Estart2();//½ÃÀÛ ÀÌ¸ðÆ¼ÄÜ2
-     time+=5;//time°ª 5Áõ°¡
-     while(time>00) //5È¸ ¹Ýº¹
+         Sleep(50);//sleepí•¨ìˆ˜ëž€ ì´ˆ ë‹¨ìœ„ë¡œ í”„ë¡œê·¸ëž¨ ì‹¤í–‰ì„ ì§€ì—°ì‹œí‚¤ëŠ” í•¨ìˆ˜. ()ì•ˆì˜ìˆ«ìž/1000ì´ˆ ì˜ë¯¸. 0.5ì´ˆ ì§€ì—°ì‹œí‚´
+            time--;//time ê°’ì„ 1ì°¨ê°
+      } //ì‹œìž‘ ì´ëª¨í‹°ì½˜1 0.5ì´ˆì”© 5ë²ˆ ì‹¤í–‰, ì¦‰ 2.5ì´ˆê°„ ì‹œìž‘ ì´ëª¨í‹°ì½˜1 ì‹¤í–‰
+      system("cls");//ì‹¤í–‰ í™”ë©´ ì§€ìš°ê¸°
+    Estart2();//ì‹œìž‘ ì´ëª¨í‹°ì½˜2
+     time+=5;//timeê°’ 5ì¦ê°€
+     while(time>00) //5íšŒ ë°˜ë³µ
      {
-        Sleep(50);//0.5ÃÊ Áö¿¬
-        time--;//time °ªÀ» 1Â÷°¨
+        Sleep(50);//0.5ì´ˆ ì§€ì—°
+        time--;//time ê°’ì„ 1ì°¨ê°
      }
-             system("cls");//½ÇÇà È­¸é Áö¿ì±â
+             system("cls");//ì‹¤í–‰ í™”ë©´ ì§€ìš°ê¸°
    
 }
 
-void Eend()//Á¾·á ÀÌ¸ðÆ¼ÄÜ
+void Eend()//ì¢…ë£Œ ì´ëª¨í‹°ì½˜
 {
    int time=5;
-   Eend1();//Á¾·á ÀÌ¸ðÆ¼ÄÜ1
-      while(time>00)//5È¸ ¹Ýº¹
+   Eend1();//ì¢…ë£Œ ì´ëª¨í‹°ì½˜1
+      while(time>00)//5íšŒ ë°˜ë³µ
       {
-         Sleep(50);//0.5ÃÊ Áö¿¬½ÃÅ´
-            time--;//time °ª 1Â÷°¨
+         Sleep(50);//0.5ì´ˆ ì§€ì—°ì‹œí‚´
+            time--;//time ê°’ 1ì°¨ê°
       }
-     system("cls");//½ÇÇà È­¸é Áö¿ì±â
-     Eend2();//Á¾·á ÀÌ¸ðÆ¼ÄÜ2
-     time+=5;//time°ª 5Áõ°¡
-     while(time>00) //5È¸ ¹Ýº¹
+     system("cls");//ì‹¤í–‰ í™”ë©´ ì§€ìš°ê¸°
+     Eend2();//ì¢…ë£Œ ì´ëª¨í‹°ì½˜2
+     time+=5;//timeê°’ 5ì¦ê°€
+     while(time>00) //5íšŒ ë°˜ë³µ
      {
-        Sleep(50);//0.5ÃÊ Áö¿¬½ÃÅ´
-        time--;//time °ª 1Â÷°¨
+        Sleep(50);//0.5ì´ˆ ì§€ì—°ì‹œí‚´
+        time--;//time ê°’ 1ì°¨ê°
      }
-             system("cls");//½ÇÇà È­¸é Áö¿ì±â
+             system("cls");//ì‹¤í–‰ í™”ë©´ ì§€ìš°ê¸°
    
 }
 
 void play_puppy(){
-        printf("³î¾ÆÁÖ±â! ¼±ÅÃÇÏ¼¼¿ä\n");
-        printf("1.°ø³îÀÌ 2.¿ø¹Ý´øÁö±â 3.¾²´Ùµë±â\n");
-        scanf_s("%d", &opt1,sizeof(opt1));//1.2.3.¹øÁß ³î¾ÆÁÖ±â È°µ¿ ¼±ÅÃ
-          if (opt1 == 1)//1.°ø³îÀÌ ¼±ÅÃ½Ã
+        printf("ë†€ì•„ì£¼ê¸°! ì„ íƒí•˜ì„¸ìš”\n");
+        printf("1.ê³µë†€ì´ 2.ì›ë°˜ë˜ì§€ê¸° 3.ì“°ë‹¤ë“¬ê¸°\n");
+        scanf_s("%d", &opt1,sizeof(opt1));//1.2.3.ë²ˆì¤‘ ë†€ì•„ì£¼ê¸° í™œë™ ì„ íƒ
+          if (opt1 == 1)//1.ê³µë†€ì´ ì„ íƒì‹œ
           {
-            love+=2;//Ä£¹Ðµµ 2Áõ°¡
+            love+=2;//ì¹œë°€ë„ 2ì¦ê°€
          system("cls");
-            printf("Ä£¹Ðµµ°¡ 2 »ó½ÂÇß½À´Ï´Ù!\n");
-         Eplay();//³ë´Â ÀÌ¸ðÆ¼ÄÜ
+            printf("ì¹œë°€ë„ê°€ 2 ìƒìŠ¹í–ˆìŠµë‹ˆë‹¤!\n");
+         Eplay();//ë…¸ëŠ” ì´ëª¨í‹°ì½˜
           }
-          else if(opt1 == 2)//2.¿ø¹Ý´øÁö±â ¼±ÅÃ½Ã
+          else if(opt1 == 2)//2.ì›ë°˜ë˜ì§€ê¸° ì„ íƒì‹œ
           {   
-            love+=5;//Ä£¹Ðµµ 5Áõ°¡
+            love+=5;//ì¹œë°€ë„ 5ì¦ê°€
          system("cls");
-            printf("Ä£¹Ðµµ°¡ 5 »ó½ÂÇß½À´Ï´Ù!\n");
-         Eplaydisk();//¿ø¹Ý¹Þ´Â ÀÌ¸ðÆ¼ÄÜ
+            printf("ì¹œë°€ë„ê°€ 5 ìƒìŠ¹í–ˆìŠµë‹ˆë‹¤!\n");
+         Eplaydisk();//ì›ë°˜ë°›ëŠ” ì´ëª¨í‹°ì½˜
           }
-          else//1¹øµµ2¹øµµ ¾Æ´Ò½Ã
+          else//1ë²ˆë„2ë²ˆë„ ì•„ë‹ì‹œ
           {
-            love+=4;//Ä£¹Ðµµ 4Áõ°¡
+            love+=4;//ì¹œë°€ë„ 4ì¦ê°€
          system("cls");
-            printf("Ä£¹Ðµµ°¡ 4 »ó½ÂÇß½À´Ï´Ù!\n");
-         Etouch();//¾²´ÙµëÀº ÀÌ¸ðÆ¼ÄÜ
+            printf("ì¹œë°€ë„ê°€ 4 ìƒìŠ¹í–ˆìŠµë‹ˆë‹¤!\n");
+         Etouch();//ì“°ë‹¤ë“¬ì€ ì´ëª¨í‹°ì½˜
           }
 }
 void management(){
-   printf("°ü¸®ÇÏ±â! ¼±ÅÃÇÏ¼¼¿ä\n");
-   printf("1.¹ßÅéÁ¤¸® 2. »êÃ¥ÇÏ±â 3.ÅÐ´Ùµë±â\n");//1.2.3.Áß °ü¸®ÇÏ±â È°µ¿ ¼±ÅÃ
+   printf("ê´€ë¦¬í•˜ê¸°! ì„ íƒí•˜ì„¸ìš”\n");
+   printf("1.ë°œí†±ì •ë¦¬ 2. ì‚°ì±…í•˜ê¸° 3.í„¸ë‹¤ë“¬ê¸°\n");//1.2.3.ì¤‘ ê´€ë¦¬í•˜ê¸° í™œë™ ì„ íƒ
    scanf_s("%d", &opt2,sizeof(opt2));
-      if (opt2 == 1)//1.¹ßÅéÁ¤¸® ¼±ÅÃ½Ã
+      if (opt2 == 1)//1.ë°œí†±ì •ë¦¬ ì„ íƒì‹œ
       {
-      pretty+=5;//ÀÌ»Ý 5Áõ°¡
+      pretty+=5;//ì´ì¨ 5ì¦ê°€
       system("cls");
-      printf("ÀÌ»ÝÀÌ 5 »ó½ÂÇß½À´Ï´Ù!\n");
-      Efoot();//¹ßÅéÀÚ¸¥ ÀÌ¸ðÆ¼ÄÜ
+      printf("ì´ì¨ì´ 5 ìƒìŠ¹í–ˆìŠµë‹ˆë‹¤!\n");
+      Efoot();//ë°œí†±ìžë¥¸ ì´ëª¨í‹°ì½˜
       }
-      else if (opt2 == 2)//2.»êÃ¥ÇÏ±â ¼±ÅÃ½Ã
+      else if (opt2 == 2)//2.ì‚°ì±…í•˜ê¸° ì„ íƒì‹œ
       {   
-      pretty+=4;//ÀÌ»Ý 4Áõ°¡
+      pretty+=4;//ì´ì¨ 4ì¦ê°€
       system("cls");
-      printf("ÀÌ»ÝÀÌ 4 »ó½ÂÇß½À´Ï´Ù!\n");
-      Ewalking();//»êÃ¥ÇÏ´Â ÀÌ¸ðÆ¼ÄÜ
+      printf("ì´ì¨ì´ 4 ìƒìŠ¹í–ˆìŠµë‹ˆë‹¤!\n");
+      Ewalking();//ì‚°ì±…í•˜ëŠ” ì´ëª¨í‹°ì½˜
       }
-      else//1.2.¹øµµ ¾Æ´Ò½Ã
+      else//1.2.ë²ˆë„ ì•„ë‹ì‹œ
       {
-      pretty+=3;//ÀÌ»Ý 3Áõ°¡
+      pretty+=3;//ì´ì¨ 3ì¦ê°€
       system("cls");
-      printf("ÀÌ»ÝÀÌ 3 »ó½ÂÇß½À´Ï´Ù!\n");
-      Ecut();//ÅÐÀÚ¸¥ ÀÌ¸ðÆ¼ÄÜ
+      printf("ì´ì¨ì´ 3 ìƒìŠ¹í–ˆìŠµë‹ˆë‹¤!\n");
+      Ecut();//í„¸ìžë¥¸ ì´ëª¨í‹°ì½˜
       }
 }
 void training(){
 
-    int num, answer;//ÀÔ·Âº¯¼ö,Á¤´äº¯¼ö      
-         srand(time(NULL));//·£´ýÇÔ¼ö ³­¼ö»ý¼º
+    int num, answer;//ìž…ë ¥ë³€ìˆ˜,ì •ë‹µë³€ìˆ˜      
+         srand(time(NULL));//ëžœë¤í•¨ìˆ˜ ë‚œìˆ˜ìƒì„±
  
-         printf("ÈÆ·Ã¿¡ ¼º°øÇÏ·Á¸é °­¾ÆÁö ÄûÁî¸¦ ¸ÂÃß¼¼¿ä(OXÄûÁîÀÔ´Ï´Ù. ¸ÂÀ¸¸é 1¹ø Æ²¸®¸é 2¹øÀ» ´©¸£¼¼¿ä.)\n");
+         printf("í›ˆë ¨ì— ì„±ê³µí•˜ë ¤ë©´ ê°•ì•„ì§€ í€´ì¦ˆë¥¼ ë§žì¶”ì„¸ìš”(OXí€´ì¦ˆìž…ë‹ˆë‹¤. ë§žìœ¼ë©´ 1ë²ˆ í‹€ë¦¬ë©´ 2ë²ˆì„ ëˆ„ë¥´ì„¸ìš”.)\n");
          printf("\n");
   
-          switch(rand()%11)//11°³ÀÇ¼ö Áß 1°³ ·£´ýÀ¸·Î °í¸§
+          switch(rand()%11)//11ê°œì˜ìˆ˜ ì¤‘ 1ê°œ ëžœë¤ìœ¼ë¡œ ê³ ë¦„
          {
-            case 0://·£´ý¼ö 0ÀÌ °ñ¶óÁ³À»¶§
+            case 0://ëžœë¤ìˆ˜ 0ì´ ê³¨ë¼ì¡Œì„ë•Œ
 
-               printf("°­¾ÆÁö´Â ³¿»õ·Î ½Ã°£À» ´À³¤´Ù\n");
-               answer=1;//´äÀº 1¹ø
-               scanf_s("%d",&num,sizeof(num));//1.2¹øÁß ´ä ¼±ÅÃÇØ¼­ ÀÔ·Â
-               if(answer==num)//Á¤´ä°ú ÀÔ·ÂÇÑ ¼ýÀÚ°¡ ÀÏÄ¡ÇÒ¶§
+               printf("ê°•ì•„ì§€ëŠ” ëƒ„ìƒˆë¡œ ì‹œê°„ì„ ëŠë‚€ë‹¤\n");
+               answer=1;//ë‹µì€ 1ë²ˆ
+               scanf_s("%d",&num,sizeof(num));//1.2ë²ˆì¤‘ ë‹µ ì„ íƒí•´ì„œ ìž…ë ¥
+               if(answer==num)//ì •ë‹µê³¼ ìž…ë ¥í•œ ìˆ«ìžê°€ ì¼ì¹˜í• ë•Œ
                {
-                  printf("ÈÆ·Ã¿¡ ¼º°øÇß½À´Ï´Ù! 5Á¡ È¹µæ!\n");
-                  train+=5;//ÈÆ·ÃÁ¡¼ö 5Á¡ Áõ°¡
+                  printf("í›ˆë ¨ì— ì„±ê³µí–ˆìŠµë‹ˆë‹¤! 5ì  íšë“!\n");
+                  train+=5;//í›ˆë ¨ì ìˆ˜ 5ì  ì¦ê°€
                }
       
-               else//¿À´äÀÏ ½Ã ÈÆ·Ã½ÇÆÐ
-                  printf("ÈÆ·Ã¿¡ ½ÇÆÐÇß½À´Ï´Ù,\n");
+               else//ì˜¤ë‹µì¼ ì‹œ í›ˆë ¨ì‹¤íŒ¨
+                  printf("í›ˆë ¨ì— ì‹¤íŒ¨í–ˆìŠµë‹ˆë‹¤,\n");
    
-               break;//³¡
-            case 1://·£´ý¼ö 1ÀÌ °ñ¶óÁ³À»¶§
+               break;//ë
+            case 1://ëžœë¤ìˆ˜ 1ì´ ê³¨ë¼ì¡Œì„ë•Œ
       
-               printf("°­¾ÆÁö´Â ¾ó±¼·Î °¨Á¤À» Ç¥ÇöÇÑ´Ù\n");
-               answer=1;//´äÀº 1¹ø
-               scanf_s("%d",&num,sizeof(num));//1.2¹øÁß ´ä ¼±ÅÃÇØ¼­ ÀÔ·Â
-               if(answer==num)//Á¤´ä°ú ÀÔ·ÂÇÑ ¼ýÀÚ°¡ ÀÏÄ¡ÇÒ¶§
+               printf("ê°•ì•„ì§€ëŠ” ì–¼êµ´ë¡œ ê°ì •ì„ í‘œí˜„í•œë‹¤\n");
+               answer=1;//ë‹µì€ 1ë²ˆ
+               scanf_s("%d",&num,sizeof(num));//1.2ë²ˆì¤‘ ë‹µ ì„ íƒí•´ì„œ ìž…ë ¥
+               if(answer==num)//ì •ë‹µê³¼ ìž…ë ¥í•œ ìˆ«ìžê°€ ì¼ì¹˜í• ë•Œ
                {
-                  printf("ÈÆ·Ã¿¡ ¼º°øÇß½À´Ï´Ù! 5Á¡ È¹µæ!\n");
-                  train+=5;//ÈÆ·ÃÁ¡¼ö 5Á¡ Áõ°¡
+                  printf("í›ˆë ¨ì— ì„±ê³µí–ˆìŠµë‹ˆë‹¤! 5ì  íšë“!\n");
+                  train+=5;//í›ˆë ¨ì ìˆ˜ 5ì  ì¦ê°€
                }
-               else//¿À´äÀÏ ½Ã ÈÆ·Ã½ÇÆÐ
-                  printf("ÈÆ·Ã¿¡ ½ÇÆÐÇß½À´Ï´Ù,\n");
-               break;//³¡
-            case 2://·£´ý¼ö 2ÀÌ °ñ¶óÁ³À»¶§
+               else//ì˜¤ë‹µì¼ ì‹œ í›ˆë ¨ì‹¤íŒ¨
+                  printf("í›ˆë ¨ì— ì‹¤íŒ¨í–ˆìŠµë‹ˆë‹¤,\n");
+               break;//ë
+            case 2://ëžœë¤ìˆ˜ 2ì´ ê³¨ë¼ì¡Œì„ë•Œ
    
-               printf("°­¾ÆÁö´Â »ç¶÷ÀÇ Ç¥Á¤À» ÀÐÀ» ¼ö ¾ø´Ù.\n");
-               answer=2;//´äÀº 2¹ø
-               scanf_s("%d",&num,sizeof(num));//1.2¹øÁß ´ä ¼±ÅÃÇØ¼­ ÀÔ·Â
-               if(answer==num)//Á¤´ä°ú ÀÔ·ÂÇÑ ¼ýÀÚ°¡ ÀÏÄ¡ÇÒ¶§
+               printf("ê°•ì•„ì§€ëŠ” ì‚¬ëžŒì˜ í‘œì •ì„ ì½ì„ ìˆ˜ ì—†ë‹¤.\n");
+               answer=2;//ë‹µì€ 2ë²ˆ
+               scanf_s("%d",&num,sizeof(num));//1.2ë²ˆì¤‘ ë‹µ ì„ íƒí•´ì„œ ìž…ë ¥
+               if(answer==num)//ì •ë‹µê³¼ ìž…ë ¥í•œ ìˆ«ìžê°€ ì¼ì¹˜í• ë•Œ
                {
-                  printf("ÈÆ·Ã¿¡ ¼º°øÇß½À´Ï´Ù! 5Á¡ È¹µæ!\n");
-                  train+=5;//ÈÆ·ÃÁ¡¼ö 5Á¡ Áõ°¡
+                  printf("í›ˆë ¨ì— ì„±ê³µí–ˆìŠµë‹ˆë‹¤! 5ì  íšë“!\n");
+                  train+=5;//í›ˆë ¨ì ìˆ˜ 5ì  ì¦ê°€
                }
-               else//¿À´äÀÏ ½Ã ÈÆ·Ã½ÇÆÐ
-                  printf("ÈÆ·Ã¿¡ ½ÇÆÐÇß½À´Ï´Ù,\n");
-               break;//³¡
-            case 3://·£´ý¼ö 3ÀÌ °ñ¶óÁ³À»¶§
+               else//ì˜¤ë‹µì¼ ì‹œ í›ˆë ¨ì‹¤íŒ¨
+                  printf("í›ˆë ¨ì— ì‹¤íŒ¨í–ˆìŠµë‹ˆë‹¤,\n");
+               break;//ë
+            case 3://ëžœë¤ìˆ˜ 3ì´ ê³¨ë¼ì¡Œì„ë•Œ
    
-               printf("°­¾ÆÁö´Â ³²ÀÚº¸´Ù ¿©ÀÚ¸¦ ´õ ÁÁ¾ÆÇÑ´Ù.\n");
-               answer=1;//´äÀº 1¹ø
-                scanf_s("%d",&num,sizeof(num));//1.2¹øÁß ´ä ¼±ÅÃÇØ¼­ ÀÔ·Â
-               if(answer==num)//Á¤´ä°ú ÀÔ·ÂÇÑ ¼ýÀÚ°¡ ÀÏÄ¡ÇÒ¶§
+               printf("ê°•ì•„ì§€ëŠ” ë‚¨ìžë³´ë‹¤ ì—¬ìžë¥¼ ë” ì¢‹ì•„í•œë‹¤.\n");
+               answer=1;//ë‹µì€ 1ë²ˆ
+                scanf_s("%d",&num,sizeof(num));//1.2ë²ˆì¤‘ ë‹µ ì„ íƒí•´ì„œ ìž…ë ¥
+               if(answer==num)//ì •ë‹µê³¼ ìž…ë ¥í•œ ìˆ«ìžê°€ ì¼ì¹˜í• ë•Œ
                {
-                  printf("ÈÆ·Ã¿¡ ¼º°øÇß½À´Ï´Ù! 5Á¡ È¹µæ!\n");
-                  train+=5;//ÈÆ·ÃÁ¡¼ö 5Á¡ Áõ°¡
+                  printf("í›ˆë ¨ì— ì„±ê³µí–ˆìŠµë‹ˆë‹¤! 5ì  íšë“!\n");
+                  train+=5;//í›ˆë ¨ì ìˆ˜ 5ì  ì¦ê°€
                }
-               else//¿À´äÀÏ ½Ã ÈÆ·Ã½ÇÆÐ
-                  printf("ÈÆ·Ã¿¡ ½ÇÆÐÇß½À´Ï´Ù,\n");
-               break;//³¡
-            case 4://·£´ý¼ö 4ÀÌ °ñ¶óÁ³À»¶§
+               else//ì˜¤ë‹µì¼ ì‹œ í›ˆë ¨ì‹¤íŒ¨
+                  printf("í›ˆë ¨ì— ì‹¤íŒ¨í–ˆìŠµë‹ˆë‹¤,\n");
+               break;//ë
+            case 4://ëžœë¤ìˆ˜ 4ì´ ê³¨ë¼ì¡Œì„ë•Œ
    
-               printf("ÇÑ¹ã Áß¿¡ °³°¡ °©ÀÚ±â ¿­ÀÌ ³ª¸ç ±¸Åä¸¦ ÇÏ¸é »ç¶÷ ÇØ¿­Á¦¸¦ ¸Ô¿©µµ µÈ´Ù. \n");
-               answer=2;//´äÀº 2¹ø
-               scanf_s("%d",&num,sizeof(num));//1.2¹øÁß ´ä ¼±ÅÃÇØ¼­ ÀÔ·Â
-               if(answer==num)//Á¤´ä°ú ÀÔ·ÂÇÑ ¼ýÀÚ°¡ ÀÏÄ¡ÇÒ¶§
+               printf("í•œë°¤ ì¤‘ì— ê°œê°€ ê°‘ìžê¸° ì—´ì´ ë‚˜ë©° êµ¬í† ë¥¼ í•˜ë©´ ì‚¬ëžŒ í•´ì—´ì œë¥¼ ë¨¹ì—¬ë„ ëœë‹¤. \n");
+               answer=2;//ë‹µì€ 2ë²ˆ
+               scanf_s("%d",&num,sizeof(num));//1.2ë²ˆì¤‘ ë‹µ ì„ íƒí•´ì„œ ìž…ë ¥
+               if(answer==num)//ì •ë‹µê³¼ ìž…ë ¥í•œ ìˆ«ìžê°€ ì¼ì¹˜í• ë•Œ
                {
-                  printf("ÈÆ·Ã¿¡ ¼º°øÇß½À´Ï´Ù! 5Á¡ È¹µæ!\n");
-                  train+=5;//ÈÆ·ÃÁ¡¼ö 5Á¡ Áõ°¡
+                  printf("í›ˆë ¨ì— ì„±ê³µí–ˆìŠµë‹ˆë‹¤! 5ì  íšë“!\n");
+                  train+=5;//í›ˆë ¨ì ìˆ˜ 5ì  ì¦ê°€
                }
-            else//¿À´äÀÏ ½Ã ÈÆ·Ã½ÇÆÐ
-               printf("ÈÆ·Ã¿¡ ½ÇÆÐÇß½À´Ï´Ù,\n");
-               break;//³¡
+            else//ì˜¤ë‹µì¼ ì‹œ í›ˆë ¨ì‹¤íŒ¨
+               printf("í›ˆë ¨ì— ì‹¤íŒ¨í–ˆìŠµë‹ˆë‹¤,\n");
+               break;//ë
 
-            case 5://·£´ý¼ö 5ÀÌ °ñ¶óÁ³À»¶§
+            case 5://ëžœë¤ìˆ˜ 5ì´ ê³¨ë¼ì¡Œì„ë•Œ
    
-               printf("ÇÊ¼ö ¿¹¹æÁ¢Á¾ÀÌ ³¡³ªÁö ¾Ê¾Æµµ »êÃ¥À» ½ÃÄÑÁà¾ß ÇÑ´Ù.\n ");
-               answer=1;//´äÀº 1¹ø
-                scanf_s("%d",&num,sizeof(num));//1.2¹øÁß ´ä ¼±ÅÃÇØ¼­ ÀÔ·Â
-               if(answer==num)//Á¤´ä°ú ÀÔ·ÂÇÑ ¼ýÀÚ°¡ ÀÏÄ¡ÇÒ¶§
+               printf("í•„ìˆ˜ ì˜ˆë°©ì ‘ì¢…ì´ ëë‚˜ì§€ ì•Šì•„ë„ ì‚°ì±…ì„ ì‹œì¼œì¤˜ì•¼ í•œë‹¤.\n ");
+               answer=1;//ë‹µì€ 1ë²ˆ
+                scanf_s("%d",&num,sizeof(num));//1.2ë²ˆì¤‘ ë‹µ ì„ íƒí•´ì„œ ìž…ë ¥
+               if(answer==num)//ì •ë‹µê³¼ ìž…ë ¥í•œ ìˆ«ìžê°€ ì¼ì¹˜í• ë•Œ
                {
-                  printf("ÈÆ·Ã¿¡ ¼º°øÇß½À´Ï´Ù! 5Á¡ È¹µæ!\n");
-                  train+=5;//ÈÆ·ÃÁ¡¼ö 5Á¡ Áõ°¡
+                  printf("í›ˆë ¨ì— ì„±ê³µí–ˆìŠµë‹ˆë‹¤! 5ì  íšë“!\n");
+                  train+=5;//í›ˆë ¨ì ìˆ˜ 5ì  ì¦ê°€
                }
-               else//¿À´äÀÏ ½Ã ÈÆ·Ã½ÇÆÐ
-                  printf("ÈÆ·Ã¿¡ ½ÇÆÐÇß½À´Ï´Ù,\n");
-               break;//³¡
-            case 6://·£´ý¼ö 6ÀÌ °ñ¶óÁ³À»¶§
+               else//ì˜¤ë‹µì¼ ì‹œ í›ˆë ¨ì‹¤íŒ¨
+                  printf("í›ˆë ¨ì— ì‹¤íŒ¨í–ˆìŠµë‹ˆë‹¤,\n");
+               break;//ë
+            case 6://ëžœë¤ìˆ˜ 6ì´ ê³¨ë¼ì¡Œì„ë•Œ
       
-               printf("°­¾ÆÁö¿¡°Ô ÀÚÀÌ¸®ÅçÀº À§ÇèÇÑ À½½ÄÀÌ´Ù.\n");
-               answer=1;//´äÀº 1¹ø
-                scanf_s("%d",&num,sizeof(num));//1.2¹øÁß ´ä ¼±ÅÃÇØ¼­ ÀÔ·Â
-               if(answer==num)//Á¤´ä°ú ÀÔ·ÂÇÑ ¼ýÀÚ°¡ ÀÏÄ¡ÇÒ¶§
+               printf("ê°•ì•„ì§€ì—ê²Œ ìžì´ë¦¬í†¨ì€ ìœ„í—˜í•œ ìŒì‹ì´ë‹¤.\n");
+               answer=1;//ë‹µì€ 1ë²ˆ
+                scanf_s("%d",&num,sizeof(num));//1.2ë²ˆì¤‘ ë‹µ ì„ íƒí•´ì„œ ìž…ë ¥
+               if(answer==num)//ì •ë‹µê³¼ ìž…ë ¥í•œ ìˆ«ìžê°€ ì¼ì¹˜í• ë•Œ
                {
-                  printf("ÈÆ·Ã¿¡ ¼º°øÇß½À´Ï´Ù! 5Á¡ È¹µæ!\n");
-                  train+=5;//ÈÆ·ÃÁ¡¼ö 5Á¡ Áõ°¡
+                  printf("í›ˆë ¨ì— ì„±ê³µí–ˆìŠµë‹ˆë‹¤! 5ì  íšë“!\n");
+                  train+=5;//í›ˆë ¨ì ìˆ˜ 5ì  ì¦ê°€
                }
-               else//¿À´äÀÏ ½Ã ÈÆ·Ã½ÇÆÐ
-                  printf("ÈÆ·Ã¿¡ ½ÇÆÐÇß½À´Ï´Ù,\n");
-               break;//³¡
+               else//ì˜¤ë‹µì¼ ì‹œ í›ˆë ¨ì‹¤íŒ¨
+                  printf("í›ˆë ¨ì— ì‹¤íŒ¨í–ˆìŠµë‹ˆë‹¤,\n");
+               break;//ë
 
-            case 7://·£´ý¼ö 7ÀÌ °ñ¶óÁ³À»¶§
+            case 7://ëžœë¤ìˆ˜ 7ì´ ê³¨ë¼ì¡Œì„ë•Œ
    
-               printf("¹Ý·Áµ¿¹°ÀÇ ¸ñ¿¡ ¹æ¿ïÀ» ´Þ¾ÆÁÖ¸é ÁÁ¾ÆÇÑ´Ù.\n");
-               answer=2;//´äÀº 2¹ø
-                scanf_s("%d",&num,sizeof(num));//1.2¹øÁß ´ä ¼±ÅÃÇØ¼­ ÀÔ·Â
-               if(answer==num)//Á¤´ä°ú ÀÔ·ÂÇÑ ¼ýÀÚ°¡ ÀÏÄ¡ÇÒ¶§
+               printf("ë°˜ë ¤ë™ë¬¼ì˜ ëª©ì— ë°©ìš¸ì„ ë‹¬ì•„ì£¼ë©´ ì¢‹ì•„í•œë‹¤.\n");
+               answer=2;//ë‹µì€ 2ë²ˆ
+                scanf_s("%d",&num,sizeof(num));//1.2ë²ˆì¤‘ ë‹µ ì„ íƒí•´ì„œ ìž…ë ¥
+               if(answer==num)//ì •ë‹µê³¼ ìž…ë ¥í•œ ìˆ«ìžê°€ ì¼ì¹˜í• ë•Œ
                {
-                  printf("ÈÆ·Ã¿¡ ¼º°øÇß½À´Ï´Ù! 5Á¡ È¹µæ!\n");
-                  train+=5;//ÈÆ·ÃÁ¡¼ö 5Á¡ Áõ°¡
+                  printf("í›ˆë ¨ì— ì„±ê³µí–ˆìŠµë‹ˆë‹¤! 5ì  íšë“!\n");
+                  train+=5;//í›ˆë ¨ì ìˆ˜ 5ì  ì¦ê°€
                }
-               else//¿À´äÀÏ ½Ã ÈÆ·Ã½ÇÆÐ
-                  printf("ÈÆ·Ã¿¡ ½ÇÆÐÇß½À´Ï´Ù,\n");
-               break;//³¡
-            case 8://·£´ý¼ö 8ÀÌ °ñ¶óÁ³À»¶§
+               else//ì˜¤ë‹µì¼ ì‹œ í›ˆë ¨ì‹¤íŒ¨
+                  printf("í›ˆë ¨ì— ì‹¤íŒ¨í–ˆìŠµë‹ˆë‹¤,\n");
+               break;//ë
+            case 8://ëžœë¤ìˆ˜ 8ì´ ê³¨ë¼ì¡Œì„ë•Œ
    
-               printf("°³´Â ±âºÐÀÌ ³ª»Ü ¶§µµ ²¿¸®¸¦ Èçµé ¼ö ÀÖ´Ù.\n");
-               answer=1;//´äÀº 1¹ø
-                scanf_s("%d",&num,sizeof(num));//1.2¹øÁß ´ä ¼±ÅÃÇØ¼­ ÀÔ·Â
-               if(answer==num)//Á¤´ä°ú ÀÔ·ÂÇÑ ¼ýÀÚ°¡ ÀÏÄ¡ÇÒ¶§
+               printf("ê°œëŠ” ê¸°ë¶„ì´ ë‚˜ì  ë•Œë„ ê¼¬ë¦¬ë¥¼ í”ë“¤ ìˆ˜ ìžˆë‹¤.\n");
+               answer=1;//ë‹µì€ 1ë²ˆ
+                scanf_s("%d",&num,sizeof(num));//1.2ë²ˆì¤‘ ë‹µ ì„ íƒí•´ì„œ ìž…ë ¥
+               if(answer==num)//ì •ë‹µê³¼ ìž…ë ¥í•œ ìˆ«ìžê°€ ì¼ì¹˜í• ë•Œ
                {
-                  printf("ÈÆ·Ã¿¡ ¼º°øÇß½À´Ï´Ù! 5Á¡ È¹µæ!\n");
-                  train+=5;//ÈÆ·ÃÁ¡¼ö 5Á¡ Áõ°¡
+                  printf("í›ˆë ¨ì— ì„±ê³µí–ˆìŠµë‹ˆë‹¤! 5ì  íšë“!\n");
+                  train+=5;//í›ˆë ¨ì ìˆ˜ 5ì  ì¦ê°€
                }
-               else//¿À´äÀÏ ½Ã ÈÆ·Ã½ÇÆÐ
-                  printf("ÈÆ·Ã¿¡ ½ÇÆÐÇß½À´Ï´Ù,\n");
-               break;//³¡
+               else//ì˜¤ë‹µì¼ ì‹œ í›ˆë ¨ì‹¤íŒ¨
+                  printf("í›ˆë ¨ì— ì‹¤íŒ¨í–ˆìŠµë‹ˆë‹¤,\n");
+               break;//ë
 
-            case 9://·£´ý¼ö 9ÀÌ °ñ¶óÁ³À»¶§
+            case 9://ëžœë¤ìˆ˜ 9ì´ ê³¨ë¼ì¡Œì„ë•Œ
    
-               printf("°³´Â ¸Ô´Â °Íº¸´Ù »êÃ¥À» ´õ ÁÁ¾Æ ÇÑ´Ù.\n");
-               answer=1;//´äÀº 1¹ø
-               scanf_s("%d",&num,sizeof(num));//1.2¹øÁß ´ä ¼±ÅÃÇØ¼­ ÀÔ·Â
-               if(answer==num)//Á¤´ä°ú ÀÔ·ÂÇÑ ¼ýÀÚ°¡ ÀÏÄ¡ÇÒ¶§
+               printf("ê°œëŠ” ë¨¹ëŠ” ê²ƒë³´ë‹¤ ì‚°ì±…ì„ ë” ì¢‹ì•„ í•œë‹¤.\n");
+               answer=1;//ë‹µì€ 1ë²ˆ
+               scanf_s("%d",&num,sizeof(num));//1.2ë²ˆì¤‘ ë‹µ ì„ íƒí•´ì„œ ìž…ë ¥
+               if(answer==num)//ì •ë‹µê³¼ ìž…ë ¥í•œ ìˆ«ìžê°€ ì¼ì¹˜í• ë•Œ
                {
-                  printf("ÈÆ·Ã¿¡ ¼º°øÇß½À´Ï´Ù! 5Á¡ È¹µæ!\n");
-                  train+=5;//ÈÆ·ÃÁ¡¼ö 5Á¡ Áõ°¡
+                  printf("í›ˆë ¨ì— ì„±ê³µí–ˆìŠµë‹ˆë‹¤! 5ì  íšë“!\n");
+                  train+=5;//í›ˆë ¨ì ìˆ˜ 5ì  ì¦ê°€
                }
-               else//¿À´äÀÏ ½Ã ÈÆ·Ã½ÇÆÐ
-                  printf("ÈÆ·Ã¿¡ ½ÇÆÐÇß½À´Ï´Ù,\n");
-               break;//³¡
-            case 10://·£´ý¼ö 10ÀÌ °ñ¶óÁ³À»¶§
+               else//ì˜¤ë‹µì¼ ì‹œ í›ˆë ¨ì‹¤íŒ¨
+                  printf("í›ˆë ¨ì— ì‹¤íŒ¨í–ˆìŠµë‹ˆë‹¤,\n");
+               break;//ë
+            case 10://ëžœë¤ìˆ˜ 10ì´ ê³¨ë¼ì¡Œì„ë•Œ
       
-               printf("°³´Â Çô¸¦ ³»¹Ð°í ´Ù´Ï¹Ç·Î ´õÀ§¿¡ °­ÇÏ´Ù.\n");
-               answer=2;//´äÀº 2¹ø
-               scanf_s("%d",&num,sizeof(num));//1.2¹øÁß ´ä ¼±ÅÃÇØ¼­ ÀÔ·Â
-               if(answer==num)//Á¤´ä°ú ÀÔ·ÂÇÑ ¼ýÀÚ°¡ ÀÏÄ¡ÇÒ¶§
+               printf("ê°œëŠ” í˜€ë¥¼ ë‚´ë°€ê³  ë‹¤ë‹ˆë¯€ë¡œ ë”ìœ„ì— ê°•í•˜ë‹¤.\n");
+               answer=2;//ë‹µì€ 2ë²ˆ
+               scanf_s("%d",&num,sizeof(num));//1.2ë²ˆì¤‘ ë‹µ ì„ íƒí•´ì„œ ìž…ë ¥
+               if(answer==num)//ì •ë‹µê³¼ ìž…ë ¥í•œ ìˆ«ìžê°€ ì¼ì¹˜í• ë•Œ
                {
-                  printf("ÈÆ·Ã¿¡ ¼º°øÇß½À´Ï´Ù! 5Á¡ È¹µæ!\n");
-                  train+=5;//ÈÆ·ÃÁ¡¼ö 5Á¡ Áõ°¡
+                  printf("í›ˆë ¨ì— ì„±ê³µí–ˆìŠµë‹ˆë‹¤! 5ì  íšë“!\n");
+                  train+=5;//í›ˆë ¨ì ìˆ˜ 5ì  ì¦ê°€
                }
-               else//¿À´äÀÏ ½Ã ÈÆ·Ã½ÇÆÐ
-                  printf("ÈÆ·Ã¿¡ ½ÇÆÐÇß½À´Ï´Ù,\n");
-               break;//³¡
+               else//ì˜¤ë‹µì¼ ì‹œ í›ˆë ¨ì‹¤íŒ¨
+                  printf("í›ˆë ¨ì— ì‹¤íŒ¨í–ˆìŠµë‹ˆë‹¤,\n");
+               break;//ë
 
-            case 11://·£´ý¼ö 11ÀÌ °ñ¶óÁ³À»¶§
+            case 11://ëžœë¤ìˆ˜ 11ì´ ê³¨ë¼ì¡Œì„ë•Œ
          
-               printf("°³´Â ÄÚ¸¦ ¸¸Á®ÁÖ¸é ÁÁ¾ÆÇÑ´Ù.\n");
-               answer=2;//´äÀº 2¹ø
-                scanf_s("%d",&num,sizeof(num));//1.2¹øÁß ´ä ¼±ÅÃÇØ¼­ ÀÔ·Â
-               if(answer==num)//Á¤´ä°ú ÀÔ·ÂÇÑ ¼ýÀÚ°¡ ÀÏÄ¡ÇÒ¶§
+               printf("ê°œëŠ” ì½”ë¥¼ ë§Œì ¸ì£¼ë©´ ì¢‹ì•„í•œë‹¤.\n");
+               answer=2;//ë‹µì€ 2ë²ˆ
+                scanf_s("%d",&num,sizeof(num));//1.2ë²ˆì¤‘ ë‹µ ì„ íƒí•´ì„œ ìž…ë ¥
+               if(answer==num)//ì •ë‹µê³¼ ìž…ë ¥í•œ ìˆ«ìžê°€ ì¼ì¹˜í• ë•Œ
                {
-                  printf("ÈÆ·Ã¿¡ ¼º°øÇß½À´Ï´Ù! 5Á¡ È¹µæ!\n");
-                  train+=5;//ÈÆ·ÃÁ¡¼ö 5Á¡ Áõ°¡
+                  printf("í›ˆë ¨ì— ì„±ê³µí–ˆìŠµë‹ˆë‹¤! 5ì  íšë“!\n");
+                  train+=5;//í›ˆë ¨ì ìˆ˜ 5ì  ì¦ê°€
                }
-               else//¿À´äÀÏ ½Ã ÈÆ·Ã½ÇÆÐ
-               printf("ÈÆ·Ã¿¡ ½ÇÆÐÇß½À´Ï´Ù,\n");
+               else//ì˜¤ë‹µì¼ ì‹œ í›ˆë ¨ì‹¤íŒ¨
+               printf("í›ˆë ¨ì— ì‹¤íŒ¨í–ˆìŠµë‹ˆë‹¤,\n");
                break;
-            default://¾Æ¹«°Íµµ¾Æ´Ò½Ã
-               break;//³¡
+            default://ì•„ë¬´ê²ƒë„ì•„ë‹ì‹œ
+               break;//ë
       
-            }//switch¹® Á¾·á
+            }//switchë¬¸ ì¢…ë£Œ
          
-}//trainingÇÔ¼ö Á¾·á
+}//trainingí•¨ìˆ˜ ì¢…ë£Œ
 void Feeding(){
-        printf("¸ÔÀÌÁÖ±â! ¼±ÅÃÇÏ¼¼¿ä\n"); 
-        printf("1.»ç·á 2.¹° 3.ÃÊÄÝ¸´ 4.¿À´Ã ¸Ô´Ù³²±ä Àú³á\n");
-        scanf_s("%d", &opt4,sizeof(opt4));//1,2,3,4 Áß ¸ÔÀÌÁÖ±â È°µ¿ ¼±ÅÃ
-          if (opt4 ==1)//1.»ç·á ¼±ÅÃ½Ã
+        printf("ë¨¹ì´ì£¼ê¸°! ì„ íƒí•˜ì„¸ìš”\n"); 
+        printf("1.ì‚¬ë£Œ 2.ë¬¼ 3.ì´ˆì½œë¦¿ 4.ì˜¤ëŠ˜ ë¨¹ë‹¤ë‚¨ê¸´ ì €ë…\n");
+        scanf_s("%d", &opt4,sizeof(opt4));//1,2,3,4 ì¤‘ ë¨¹ì´ì£¼ê¸° í™œë™ ì„ íƒ
+          if (opt4 ==1)//1.ì‚¬ë£Œ ì„ íƒì‹œ
           {
-            power+=5;// Èû 5Áõ°¡
+            power+=5;// íž˜ 5ì¦ê°€
          system("cls");
-            printf("ÈûÀÌ 5 »ó½ÂÇß½À´Ï´Ù!\n");
-         Efood();//»ç·á¸Ô´Â ÀÌ¸ðÆ¼ÄÜ
+            printf("íž˜ì´ 5 ìƒìŠ¹í–ˆìŠµë‹ˆë‹¤!\n");
+         Efood();//ì‚¬ë£Œë¨¹ëŠ” ì´ëª¨í‹°ì½˜
           }
-          else if (opt4 ==2)//2.¹° ¼±ÅÃ½Ã
+          else if (opt4 ==2)//2.ë¬¼ ì„ íƒì‹œ
           {   
-            power+=3;// Èû 3Áõ°¡
+            power+=3;// íž˜ 3ì¦ê°€
          system("cls");
-            printf("ÈûÀÌ 3 »ó½ÂÇß½À´Ï´Ù!\n");
-         Ewater();//¹°¸Ô´Â ÀÌ¸ðÆ¼ÄÜ
+            printf("íž˜ì´ 3 ìƒìŠ¹í–ˆìŠµë‹ˆë‹¤!\n");
+         Ewater();//ë¬¼ë¨¹ëŠ” ì´ëª¨í‹°ì½˜
           }
-          else if (opt4 ==3)//3. ÃÊÄÝ¸´ ¼±ÅÃ½Ã
+          else if (opt4 ==3)//3. ì´ˆì½œë¦¿ ì„ íƒì‹œ
           {
-            power-=10;//Èû 10°¨¼Ò
+            power-=10;//íž˜ 10ê°ì†Œ
          system("cls");
-            printf("°­¾ÆÁö°¡ Åä¸¦ÇÕ´Ï´Ù!¤Ð¤ÐÈûÀÌ 10°¨¼ÒÇß¾î¿ä.\n");
-         Eto();//ÅäÇÏ´Â ÀÌ¸ðÆ¼ÄÜ
+            printf("ê°•ì•„ì§€ê°€ í† ë¥¼í•©ë‹ˆë‹¤!ã… ã… íž˜ì´ 10ê°ì†Œí–ˆì–´ìš”.\n");
+         Eto();//í† í•˜ëŠ” ì´ëª¨í‹°ì½˜
           }
-          else//1.2.3 ¿ÜÀÇ °ª ¼±ÅÃ
+          else//1.2.3 ì™¸ì˜ ê°’ ì„ íƒ
           {
-            power-=4;//Èû 4°¨¼Ò
+            power-=4;//íž˜ 4ê°ì†Œ
          system("cls");
-            printf("°­¾ÆÁö¿¡°Ô´Â »ç·á¸¦ ÁÖ¼¼¿ä!ÈûÀÌ 4°¨¼ÒÇß¾î¿ä.\n");
-         Ehumanfood();//»ç¶÷À½½Ä¸ÔÀº ÀÌ¸ðÆ¼ÄÜ
+            printf("ê°•ì•„ì§€ì—ê²ŒëŠ” ì‚¬ë£Œë¥¼ ì£¼ì„¸ìš”!íž˜ì´ 4ê°ì†Œí–ˆì–´ìš”.\n");
+         Ehumanfood();//ì‚¬ëžŒìŒì‹ë¨¹ì€ ì´ëª¨í‹°ì½˜
           }
 }
-void end_game(){//°ÔÀÓÀ» ³¡³¾ ½Ã
+void end_game(){//ê²Œìž„ì„ ëë‚¼ ì‹œ
    Eend();
    Eend();
-   opt1 = 0;//0 ÀÔ·Â½Ã
-   check_score();//¾Ö°ßÁ¡¼ö È®ÀÎÇÒ ¼ö ÀÖ´Â ÇÔ¼ö·Î ÀÌµ¿
+   opt1 = 0;//0 ìž…ë ¥ì‹œ
+   check_score();//ì• ê²¬ì ìˆ˜ í™•ì¸í•  ìˆ˜ ìžˆëŠ” í•¨ìˆ˜ë¡œ ì´ë™
 }
-void check_score(){//¾Ö°ßÁ¡¼ö º¸¿©ÁÖ´Â ÇÔ¼ö
-   printf("´ç½ÅÀÇ ¾Ö°ß Á¡¼ö´Â?\n");
-   result = love + pretty + train + power;//¾Ö°ßÁ¡¼ö=¸ðµçÁ¡¼ö ´õÇÑ°Í
-   printf("Ä£¹Ðµµ %d! ÀÌ»Ý %d! ÈÆ·ÃÁ¡¼ö %d! Èû %d!\n\n", love, pretty, train, power);
+void check_score(){//ì• ê²¬ì ìˆ˜ ë³´ì—¬ì£¼ëŠ” í•¨ìˆ˜
+   printf("ë‹¹ì‹ ì˜ ì• ê²¬ ì ìˆ˜ëŠ”?\n");
+   result = love + pretty + train + power;//ì• ê²¬ì ìˆ˜=ëª¨ë“ ì ìˆ˜ ë”í•œê²ƒ
+   printf("ì¹œë°€ë„ %d! ì´ì¨ %d! í›ˆë ¨ì ìˆ˜ %d! íž˜ %d!\n\n", love, pretty, train, power);
 
    
-      if(result==0)//¾Ö°ßÁ¡¼ö°¡ 0ÀÏ °æ¿ì
+      if(result==0)//ì• ê²¬ì ìˆ˜ê°€ 0ì¼ ê²½ìš°
      {
-        printf("¾ÆÁ÷ ½ÃÀÛÀ» ¾ÈÇÑ°Í °°Àºµ¥ !!? ¿­½ÉÈ÷ Çß´Âµ¥µµ 0Á¡ÀÏ¸®°¡ ¾øÀÚ³ª ! \n");
+        printf("ì•„ì§ ì‹œìž‘ì„ ì•ˆí•œê²ƒ ê°™ì€ë° !!? ì—´ì‹¬ížˆ í–ˆëŠ”ë°ë„ 0ì ì¼ë¦¬ê°€ ì—†ìžë‚˜ ! \n");
      }
-     else if(result<0)//¾Ö°ßÁ¡¼ö°¡ 0º¸´Ù ÀÛÀ» °æ¿ì
+     else if(result<0)//ì• ê²¬ì ìˆ˜ê°€ 0ë³´ë‹¤ ìž‘ì„ ê²½ìš°
       {
-         printf("³Í °­¾ÆÁö Å°¿ï ÀÚ°ÝÀÌ ¾ø¾î!\n");
+         printf("ë„Œ ê°•ì•„ì§€ í‚¤ìš¸ ìžê²©ì´ ì—†ì–´!\n");
       }
-      else if(result>=1 && result<30)//¾Ö°ßÁ¡¼ö°¡ 1ÀÌ»óÀÌ°í 30º¸´Ù ÀÛÀ» °æ¿ì
+      else if(result>=1 && result<30)//ì• ê²¬ì ìˆ˜ê°€ 1ì´ìƒì´ê³  30ë³´ë‹¤ ìž‘ì„ ê²½ìš°
       {
-         printf("¾ÆÇÁÁö¾Ê°Ô µ¹ºÁÁà¼­ °í¸¶¿ö\n");
+         printf("ì•„í”„ì§€ì•Šê²Œ ëŒë´ì¤˜ì„œ ê³ ë§ˆì›Œ\n");
       }
-      else if(result>=30)//¾Ö°ßÁ¡¼ö°¡ 30ÀÌ»óÀÏ °æ¿ì
-         printf("°­¾ÆÁö Å°¿ì´Â µ¥¿¡ ÀÏ°¡°ßÀÌ ÀÖ±¸³ª! ³Ê¸¦ Æê¼¥¿¡ ³Ö¾îÁÖµµ·Ï ÇÒ°Ô!\n");
+      else if(result>=30)//ì• ê²¬ì ìˆ˜ê°€ 30ì´ìƒì¼ ê²½ìš°
+         printf("ê°•ì•„ì§€ í‚¤ìš°ëŠ” ë°ì— ì¼ê°€ê²¬ì´ ìžˆêµ¬ë‚˜! ë„ˆë¥¼ íŽ«ìƒµì— ë„£ì–´ì£¼ë„ë¡ í• ê²Œ!\n");
 }
 void Choose()
 {
    
-   _beginthreadex(NULL, 0, Thread, 0, 0,NULL);//½º·¹µå ½ÃÀÛ
-   while(opt1){ //opt1¹Ýº¹
-      printf("1. ³î¾ÆÁÖ±â 2. °ü¸®ÇÏ±â 3. ÈÆ·Ã 4. ¸ÔÀÌÁÖ±â 5.Á¡¼öÈ®ÀÎ 6.ÀÌÀü¸Þ´º 0. Á¾·á\n"); 
-      printf("È°µ¿¼±ÅÃ?: ");
-      scanf_s("%d", &opt1,sizeof(opt1));// 1,2,3,4,5,6,0 Áß È°µ¿ ¼±ÅÃ
+   _beginthreadex(NULL, 0, Thread, 0, 0,NULL);//ìŠ¤ë ˆë“œ ì‹œìž‘
+   while(opt1){ //opt1ë°˜ë³µ
+      printf("1. ë†€ì•„ì£¼ê¸° 2. ê´€ë¦¬í•˜ê¸° 3. í›ˆë ¨ 4. ë¨¹ì´ì£¼ê¸° 5.ì ìˆ˜í™•ì¸ 6.ì´ì „ë©”ë‰´ 0. ì¢…ë£Œ\n"); 
+      printf("í™œë™ì„ íƒ?: ");
+      scanf_s("%d", &opt1,sizeof(opt1));// 1,2,3,4,5,6,0 ì¤‘ í™œë™ ì„ íƒ
 
       switch(opt1)
       {
-      case 1://1. ³î¾ÆÁÖ±â ¼±ÅÃ ½Ã
-        play_puppy();//³î¾ÆÁÖ±â ÇÔ¼ö·Î ÀÌµ¿
+      case 1://1. ë†€ì•„ì£¼ê¸° ì„ íƒ ì‹œ
+        play_puppy();//ë†€ì•„ì£¼ê¸° í•¨ìˆ˜ë¡œ ì´ë™
         break;
-      case 2://2. °ü¸®ÇÏ±â ¼±ÅÃ ½Ã
-        management();//°ü¸®ÇÏ±â ÇÔ¼ö·Î ÀÌµ¿
+      case 2://2. ê´€ë¦¬í•˜ê¸° ì„ íƒ ì‹œ
+        management();//ê´€ë¦¬í•˜ê¸° í•¨ìˆ˜ë¡œ ì´ë™
         break;
-      case 3://3. ÈÆ·Ã ¼±ÅÃ ½Ã
+      case 3://3. í›ˆë ¨ ì„ íƒ ì‹œ
        training();
         break;
-      case 4://4. ¸ÔÀÌÁÖ±â ¼±ÅÃ ½Ã
+      case 4://4. ë¨¹ì´ì£¼ê¸° ì„ íƒ ì‹œ
         Feeding();
         break;
-     case 5://5. Á¡¼öÈ®ÀÎ ¼±ÅÃ ½Ã
+     case 5://5. ì ìˆ˜í™•ì¸ ì„ íƒ ì‹œ
         check_score();
          break;
-     case 6://6. ÀÌÀü¸Þ´º ¼±ÅÃ ½Ã
+     case 6://6. ì´ì „ë©”ë‰´ ì„ íƒ ì‹œ
         start_game();
          break;
-      case 0://0. Á¾·á ¼±ÅÃ ½Ã
+      case 0://0. ì¢…ë£Œ ì„ íƒ ì‹œ
         end_game();
          break;
-      default://¾Æ¹«°Íµµ ¾Æ´Ò½Ã
-        printf("¼ýÀÚ¸¦ Àß¸ø ÀÔ·ÂÇß¾î¿ä! ´Ù½Ã ÀÔ·ÂÇÏ¼¼¿ä! \n");
-      }//switch¹® Á¾·á
-   }//while¹® Á¾·á
+      default://ì•„ë¬´ê²ƒë„ ì•„ë‹ì‹œ
+        printf("ìˆ«ìžë¥¼ ìž˜ëª» ìž…ë ¥í–ˆì–´ìš”! ë‹¤ì‹œ ìž…ë ¥í•˜ì„¸ìš”! \n");
+      }//switchë¬¸ ì¢…ë£Œ
+   }//whileë¬¸ ì¢…ë£Œ
 
-}// ChooseÇÔ¼ö Á¾·á
+}// Chooseí•¨ìˆ˜ ì¢…ë£Œ
 
 void Infor()
 {
-   char name[20];//ÀÌ¸§º¯¼ö
-   int a;//½ÃÀÛ,Á¾·á ÀÔ·Â º¯¼ö
-   scanf_s("%s",name,sizeof(name));//ÀÌ¸§ÀÔ·Â
-   printf("%s¾Æ(¾ß)!! ³ª ¿©ÇàÀ» °¬´Ù ¿À±â·Î Çß¾î. \n¿äÁò ÀÎ»ýÀÌ ³Ê¹« Èûµé°Åµç. \n3ÀÏ µ¿¾È ³» °­¾ÆÁö ¾ß»ß¸¦ µ¹ºÁÁà. \n¾ß»ß°¡ ³ª¿¡°Ô ¾öÃ» ¼ÒÁßÇÑ Á¸ÀçÀÎ°Å Àß¾ËÁö? \nµ¹¾Æ¿Í¼­ ¾ß»ß »óÅÂ¸¦ º¸°í ³ÊÀÇ ¾Ö°ß Á¡¼ö¸¦ ÃøÁ¤ÇØ ÁÙ°Ô. \n%s¾Æ(¾ß) ¿ì¸® ¾ß»ß Àß ºÎÅ¹ÇØ!!\n", name, name);
+   char name[20];//ì´ë¦„ë³€ìˆ˜
+   int a;//ì‹œìž‘,ì¢…ë£Œ ìž…ë ¥ ë³€ìˆ˜
+   scanf_s("%s",name,sizeof(name));//ì´ë¦„ìž…ë ¥
+   printf("%sì•„(ì•¼)!! ë‚˜ ì—¬í–‰ì„ ê°”ë‹¤ ì˜¤ê¸°ë¡œ í–ˆì–´. \nìš”ì¦˜ ì¸ìƒì´ ë„ˆë¬´ íž˜ë“¤ê±°ë“ . \n3ì¼ ë™ì•ˆ ë‚´ ê°•ì•„ì§€ ì•¼ì‚ë¥¼ ëŒë´ì¤˜. \nì•¼ì‚ê°€ ë‚˜ì—ê²Œ ì—„ì²­ ì†Œì¤‘í•œ ì¡´ìž¬ì¸ê±° ìž˜ì•Œì§€? \nëŒì•„ì™€ì„œ ì•¼ì‚ ìƒíƒœë¥¼ ë³´ê³  ë„ˆì˜ ì• ê²¬ ì ìˆ˜ë¥¼ ì¸¡ì •í•´ ì¤„ê²Œ. \n%sì•„(ì•¼) ìš°ë¦¬ ì•¼ì‚ ìž˜ ë¶€íƒí•´!!\n", name, name);
     printf("\n");
-    printf("½ÃÀÛÇÏ·Á¸é 1À» ´©¸£°í, Á¾·áÇÏ·Á¸é 2¸¦ ´©¸£¼¼¿ä\n");
-    scanf_s("%d", &a,sizeof(a));//1¹ø ´©¸£¸é ½ÃÀÛ, 2¹ø ´©¸£¸é Á¾·á
+    printf("ì‹œìž‘í•˜ë ¤ë©´ 1ì„ ëˆ„ë¥´ê³ , ì¢…ë£Œí•˜ë ¤ë©´ 2ë¥¼ ëˆ„ë¥´ì„¸ìš”\n");
+    scanf_s("%d", &a,sizeof(a));//1ë²ˆ ëˆ„ë¥´ë©´ ì‹œìž‘, 2ë²ˆ ëˆ„ë¥´ë©´ ì¢…ë£Œ
    switch(a)
    {
-   case 1://1¹ø ´©¸¦½Ã
-      system("cls");//Ã¢ ±ú²ýÇÏ°Ô
+   case 1://1ë²ˆ ëˆ„ë¥¼ì‹œ
+      system("cls");//ì°½ ê¹¨ë—í•˜ê²Œ
      Estart();
      Estart();
-      Choose();//ChooseÇÔ¼ö·Î ÀÌµ¿
-      break;//³¡
-   case 2://2¹ø ´©¸¦½Ã
-     printf("Á¾·áÇÏ½Ã·Á¸é Enter¸¦ ´©¸£¼¼¿ä.\n");
-      break;//³¡
+      Choose();//Chooseí•¨ìˆ˜ë¡œ ì´ë™
+      break;//ë
+   case 2://2ë²ˆ ëˆ„ë¥¼ì‹œ
+     printf("ì¢…ë£Œí•˜ì‹œë ¤ë©´ Enterë¥¼ ëˆ„ë¥´ì„¸ìš”.\n");
+      break;//ë
    }
 
 }
@@ -762,49 +763,49 @@ void Infor()
 void Name()
 {
    int num;//
-   printf("ÀÌ¸§À» ÀÔ·ÂÇÏ¼¼¿ä : ");
+   printf("ì´ë¦„ì„ ìž…ë ¥í•˜ì„¸ìš” : ");
    scanf("%d" , &num);
-   system("cls");//Ã¢ ±ú²ýÇÏ°Ô
-   Infor();//InforÇÔ¼ö·Î ÀÌµ¿
+   system("cls");//ì°½ ê¹¨ë—í•˜ê²Œ
+   Infor();//Inforí•¨ìˆ˜ë¡œ ì´ë™
 }
-void start_game(){//°ÔÀÓ½ÃÀÛ
+void start_game(){//ê²Œìž„ì‹œìž‘
    int select;
    system("cls");
-   MeunPrint();//¸Þ´º Ãâ·Â
-   scanf("%d", &select);//¸Þ´º 1.2.3.¹ø Áß ¼±ÅÃ
+   MeunPrint();//ë©”ë‰´ ì¶œë ¥
+   scanf("%d", &select);//ë©”ë‰´ 1.2.3.ë²ˆ ì¤‘ ì„ íƒ
    switch(select)
    {
-   case 1://1¹ø ¼±ÅÃ½Ã
-      system("cls");//Ã¢ ±ú²ýÇÏ°Ô
-      Name();//Name ÇÔ¼ö·Î ÀÌµ¿
-      break;//³¡
-   case 2://2¹ø ¼±ÅÃ½Ã
-     system("cls");//Ã¢ ±ú²ýÇÏ°Ô
-      printf("°ÔÀÓÀ» Á¾·áÇÕ´Ï´Ù.\n");
-      break;//Á¾·á
-   case 3://3¹ø ¼±ÅÃ½Ã
-     system("cls");//Ã¢ ±ú²ýÇÏ°Ô
+   case 1://1ë²ˆ ì„ íƒì‹œ
+      system("cls");//ì°½ ê¹¨ë—í•˜ê²Œ
+      Name();//Name í•¨ìˆ˜ë¡œ ì´ë™
+      break;//ë
+   case 2://2ë²ˆ ì„ íƒì‹œ
+     system("cls");//ì°½ ê¹¨ë—í•˜ê²Œ
+      printf("ê²Œìž„ì„ ì¢…ë£Œí•©ë‹ˆë‹¤.\n");
+      break;//ì¢…ë£Œ
+   case 3://3ë²ˆ ì„ íƒì‹œ
+     system("cls");//ì°½ ê¹¨ë—í•˜ê²Œ
    { 
       time_t now;
       struct tm *d;
 
-      while(!kbhit())//¾Æ¹«Å°³ª ´©¸£¸é ¸Þ´º·Î µ¹¾Æ°¡°Ô
+      while(!kbhit())//ì•„ë¬´í‚¤ë‚˜ ëˆ„ë¥´ë©´ ë©”ë‰´ë¡œ ëŒì•„ê°€ê²Œ
       {
-         system("cls");//Ã¢ ±ú²ýÇÏ°Ô
+         system("cls");//ì°½ ê¹¨ë—í•˜ê²Œ
          now=time(NULL);
          d=localtime(&now);
-         printf("ÇöÀç³¯Â¥¿Í½Ã°£: %s\n", asctime(d));
+         printf("í˜„ìž¬ë‚ ì§œì™€ì‹œê°„: %s\n", asctime(d));
        }
-      system("cls");//Ã¢ ±ú²ýÇÏ°Ô
+      system("cls");//ì°½ ê¹¨ë—í•˜ê²Œ
       start_game();
-   }//case3 Á¾·á
+   }//case3 ì¢…ë£Œ
 
-   default://¾Æ¹«°Íµµ ¾Æ´Ò½Ã
-      break;//³¡
-   }//switch³¡
-}//strat_gameÇÔ¼ö ³¡
+   default://ì•„ë¬´ê²ƒë„ ì•„ë‹ì‹œ
+      break;//ë
+   }//switchë
+}//strat_gameí•¨ìˆ˜ ë
    
 int main(void)
 {
-  start_game();//°ÔÀÓ½ÃÀÛ
+  start_game();//ê²Œìž„ì‹œìž‘
 }
